@@ -1,0 +1,2 @@
+python scratch/execute_lock_audit.py
+python scratch/write_reproduction_reports.py

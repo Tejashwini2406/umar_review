@@ -1,0 +1,178 @@
+{
+  "Edge-IIoTset": {
+    "budget_100": {
+      "budget": 100,
+      "total_malicious": 1000,
+      "eligible_50": 972,
+      "successful_50": 86,
+      "asr_50": 0.08847736625514403,
+      "eligible_71": 5,
+      "successful_71": 2,
+      "asr_71": 0.4,
+      "mean_queries": 81.15432098765432,
+      "median_queries": 85.0,
+      "max_queries": 85,
+      "time_sec": 0.4422328472137451
+    },
+    "budget_250": {
+      "budget": 250,
+      "total_malicious": 1000,
+      "eligible_50": 972,
+      "successful_50": 132,
+      "asr_50": 0.13580246913580246,
+      "eligible_71": 5,
+      "successful_71": 4,
+      "asr_71": 0.8,
+      "mean_queries": 211.3672839506173,
+      "median_queries": 232.0,
+      "max_queries": 232,
+      "time_sec": 1.1079587936401367
+    },
+    "budget_500": {
+      "budget": 500,
+      "total_malicious": 1000,
+      "eligible_50": 972,
+      "successful_50": 178,
+      "asr_50": 0.1831275720164609,
+      "eligible_71": 5,
+      "successful_71": 5,
+      "asr_71": 1.0,
+      "mean_queries": 423.0524691358025,
+      "median_queries": 484.0,
+      "max_queries": 484,
+      "time_sec": 2.3204426765441895
+    }
+  },
+  "NF-ToN-IoT-v2": {
+    "budget_100": {
+      "budget": 100,
+      "total_malicious": 1000,
+      "eligible_50": 998,
+      "successful_50": 168,
+      "asr_50": 0.1683366733466934,
+      "eligible_71": 994,
+      "successful_71": 744,
+      "asr_71": 0.7484909456740443,
+      "mean_queries": 79.50801603206413,
+      "median_queries": 85.0,
+      "max_queries": 85,
+      "time_sec": 0.4622507095336914
+    },
+    "budget_250": {
+      "budget": 250,
+      "total_malicious": 1000,
+      "eligible_50": 998,
+      "successful_50": 287,
+      "asr_50": 0.2875751503006012,
+      "eligible_71": 994,
+      "successful_71": 802,
+      "asr_71": 0.806841046277666,
+      "mean_queries": 192.9248496993988,
+      "median_queries": 232.0,
+      "max_queries": 232,
+      "time_sec": 1.1124682426452637
+    },
+    "budget_500": {
+      "budget": 500,
+      "total_malicious": 1000,
+      "eligible_50": 998,
+      "successful_50": 360,
+      "asr_50": 0.36072144288577157,
+      "eligible_71": 994,
+      "successful_71": 834,
+      "asr_71": 0.8390342052313883,
+      "mean_queries": 362.29258517034066,
+      "median_queries": 484.0,
+      "max_queries": 484,
+      "time_sec": 2.267526865005493
+    }
+  },
+  "ToN-IoT": {
+    "budget_100": {
+      "budget": 100,
+      "total_malicious": 1000,
+      "eligible_50": 1000,
+      "successful_50": 1,
+      "asr_50": 0.001,
+      "eligible_71": 999,
+      "successful_71": 4,
+      "asr_71": 0.004004004004004004,
+      "mean_queries": 85.0,
+      "median_queries": 85.0,
+      "max_queries": 85,
+      "time_sec": 0.721001386642456
+    },
+    "budget_250": {
+      "budget": 250,
+      "total_malicious": 1000,
+      "eligible_50": 1000,
+      "successful_50": 1,
+      "asr_50": 0.001,
+      "eligible_71": 999,
+      "successful_71": 7,
+      "asr_71": 0.007007007007007007,
+      "mean_queries": 231.853,
+      "median_queries": 232.0,
+      "max_queries": 232,
+      "time_sec": 2.1816437244415283
+    },
+    "budget_500": {
+      "budget": 500,
+      "total_malicious": 1000,
+      "eligible_50": 1000,
+      "successful_50": 1,
+      "asr_50": 0.001,
+      "eligible_71": 999,
+      "successful_71": 12,
+      "asr_71": 0.012012012012012012,
+      "mean_queries": 483.601,
+      "median_queries": 484.0,
+      "max_queries": 484,
+      "time_sec": 3.594977378845215
+    }
+  },
+  "CICIoT2023": {
+    "budget_100": {
+      "budget": 100,
+      "total_malicious": 1000,
+      "eligible_50": 992,
+      "successful_50": 3,
+      "asr_50": 0.0030241935483870967,
+      "eligible_71": 983,
+      "successful_71": 200,
+      "asr_71": 0.2034587995930824,
+      "mean_queries": 84.85181451612904,
+      "median_queries": 85.0,
+      "max_queries": 85,
+      "time_sec": 0.618330717086792
+    },
+    "budget_250": {
+      "budget": 250,
+      "total_malicious": 1000,
+      "eligible_50": 992,
+      "successful_50": 3,
+      "asr_50": 0.0030241935483870967,
+      "eligible_71": 983,
+      "successful_71": 282,
+      "asr_71": 0.28687690742624616,
+      "mean_queries": 231.40725806451613,
+      "median_queries": 232.0,
+      "max_queries": 232,
+      "time_sec": 1.603466510772705
+    },
+    "budget_500": {
+      "budget": 500,
+      "total_malicious": 1000,
+      "eligible_50": 992,
+      "successful_50": 4,
+      "asr_50": 0.004032258064516129,
+      "eligible_71": 983,
+      "successful_71": 325,
+      "asr_71": 0.3306205493387589,
+      "mean_queries": 482.539314516129,
+      "median_queries": 484.0,
+      "max_queries": 484,
+      "time_sec": 3.3442962169647217
+    }
+  }
+}

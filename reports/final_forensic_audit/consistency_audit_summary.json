@@ -1,0 +1,160 @@
+{
+  "total_items": 19,
+  "pass_count": 18,
+  "fail_count": 0,
+  "not_verified_count": 1,
+  "audit_results": [
+    {
+      "id": 1,
+      "name": "21-Feature Representation",
+      "status": "PASS",
+      "code_evidence": "21 features in FEATURE_COLS",
+      "paper_statement": "Mentions 21-feature statistical flow representation",
+      "details": "Verified across pipeline code and paper abstract/Section III-A."
+    },
+    {
+      "id": 2,
+      "name": "Feature Ordering & Protocol Mask",
+      "status": "PASS",
+      "code_evidence": "Order matches canonical list 0-20. Protocol mask 7:11 (proto_tcp, proto_udp, proto_icmp, proto_other)",
+      "paper_statement": "Paper Section III-A lists features in 4 metric groups.",
+      "details": "Protocol mask 7:11 verified in scripts/run_golden_pipeline.py."
+    },
+    {
+      "id": 3,
+      "name": "Flow Timeout Parameters",
+      "status": "NOT VERIFIED",
+      "code_evidence": "inactivity_timeout=15.0s, max_flow_duration=120s in iot_ids/config.py and flow_builder.py",
+      "paper_statement": "Paper describes 21 flow metrics but omits explicit 15s/120s timeout values in text.",
+      "details": "Recommendation: Add explicit 15s inactivity and 120s max duration mention in Section III-A of paper."
+    },
+    {
+      "id": 4,
+      "name": "Chronological 60/20/20 Split",
+      "status": "PASS",
+      "code_evidence": "generate_v3_splits.py enforces chronological 60/20/20",
+      "paper_statement": "Paper line 115 explicitly states 'standardized 60/20/20 chronological train/validation/test splits'.",
+      "details": ""
+    },
+    {
+      "id": 5,
+      "name": "Dataset Sample Counts",
+      "status": "PASS",
+      "code_evidence": "7,000 flows total (4,200 train / 1,400 val / 1,400 test) per dataset",
+      "paper_statement": "Paper Section IV-A lists 4,200 train / 1,400 validation / 1,400 test for each dataset.",
+      "details": ""
+    },
+    {
+      "id": 6,
+      "name": "State Reset at Split Boundaries",
+      "status": "PASS",
+      "code_evidence": "Flow generator resets state between train, val, and test splits",
+      "paper_statement": "Paper line 115 explicitly states 'with detector state reset at split boundaries to prevent data leakage'.",
+      "details": ""
+    },
+    {
+      "id": 7,
+      "name": "Train-Only Scaler Fitting",
+      "status": "PASS",
+      "code_evidence": "scaler.fit_transform(X_tr); scaler.transform(X_va); scaler.transform(X_te)",
+      "paper_statement": "Paper line 70 states 'clamped using robust scaler parameters fitted on benign training distributions'.",
+      "details": ""
+    },
+    {
+      "id": 8,
+      "name": "Random Forest Hyperparameters",
+      "status": "PASS",
+      "code_evidence": "n_estimators=100, max_depth=15, random_state=42",
+      "paper_statement": "Paper line 75 states 'ensemble of 100 decision trees'. (Paper omits max_depth=15).",
+      "details": "Recommendation: Paper can optionally specify max_depth=15 in Section III-B."
+    },
+    {
+      "id": 9,
+      "name": "Standard MLP Architecture",
+      "status": "PASS",
+      "code_evidence": "21->128->64->32->1, BatchNorm, ReLU, Dropout(0.2), Adam lr=0.001, epochs=15, batch_size=256",
+      "paper_statement": "Paper line 76 states '21 -> 128 -> 64 -> 32 -> 1 with Batch Normalization, ReLU activations, and Dropout (p=0.2)'.",
+      "details": ""
+    },
+    {
+      "id": 10,
+      "name": "Robust MLP & PGD-7 Training",
+      "status": "PASS",
+      "code_evidence": "PGD-7, eps=0.10, alpha=0.025, adv_ratio=0.5",
+      "paper_statement": "Paper line 82-86 details PGD-7 training with epsilon=0.1, alpha=0.025, k=7.",
+      "details": ""
+    },
+    {
+      "id": 11,
+      "name": "Option C Probability Fusion",
+      "status": "PASS",
+      "code_evidence": "P_opt_c = 0.7 * p_rf + 0.3 * p_mlp_rob",
+      "paper_statement": "Paper Equation (1): P_Option C = 0.7 * P_RF + 0.3 * P_MLP.",
+      "details": ""
+    },
+    {
+      "id": 12,
+      "name": "Differential Privacy Bounds & Scope",
+      "status": "PASS",
+      "code_evidence": "Neural stream only, C=1.0, sigma=1.0, batch_size=64, delta=1e-5, Opacus PRV accountant, eps=2.37",
+      "paper_statement": "Paper Section III-C states (eps=2.37, delta=10^-5)-DP under Opacus PRV accountant, neural stream exclusively.",
+      "details": ""
+    },
+    {
+      "id": 13,
+      "name": "XAI Weighted Component Attribution",
+      "status": "PASS",
+      "code_evidence": "0.7 * norm(RF SHAP/MDI) + 0.3 * norm(MLP Grad)",
+      "paper_statement": "Paper line 98-101 defines Weighted Component Attribution Aggregation with 0.7 RF + 0.3 MLP normalized weights.",
+      "details": ""
+    },
+    {
+      "id": 14,
+      "name": "PGD-10 Adversarial Evaluation",
+      "status": "PASS",
+      "code_evidence": "PGD-10, eps=0.10, alpha=0.025, 10 steps",
+      "paper_statement": "Paper Section IV-B and Section V-B state PGD-10 attack at epsilon=0.1, alpha=0.025, 10 iterations.",
+      "details": ""
+    },
+    {
+      "id": 15,
+      "name": "Adversarial Evaluation Scope Clarification",
+      "status": "PASS",
+      "code_evidence": "Gradients computed on neural stream, perturbed samples evaluated on RF and Option C",
+      "paper_statement": "Paper line 177-178 explicitly states PGD-10 perturbations were generated using neural stream gradients and evaluated on RF and Option C.",
+      "details": ""
+    },
+    {
+      "id": 16,
+      "name": "Runtime Latency & Scope",
+      "status": "PASS",
+      "code_evidence": "N=1024 -> 16,504.7 samples/s (0.0606 ms/sample); N=1 -> 69.40 ms. Classifier-only host benchmark.",
+      "paper_statement": "Paper Section V-D reports single-CPU host throughput of 16,505 samples/sec (0.0606 ms/sample) at N=1024.",
+      "details": ""
+    },
+    {
+      "id": 17,
+      "name": "Dataset Names & Counts",
+      "status": "PASS",
+      "code_evidence": "Edge-IIoTset, NF-ToN-IoT-v2, ToN-IoT, CICIoT2023 (7,000 flows each)",
+      "paper_statement": "Paper lists four datasets with 7,000 flows each.",
+      "details": ""
+    },
+    {
+      "id": 18,
+      "name": "Software & Framework Specifications",
+      "status": "PASS",
+      "code_evidence": "Python 3.12, PyTorch 2.x, scikit-learn, Opacus, joblib",
+      "paper_statement": "Paper cites Opacus PRV accountant, PyTorch, and scikit-learn algorithms.",
+      "details": ""
+    },
+    {
+      "id": 19,
+      "name": "Golden Benchmark Numerical Reconciliation",
+      "status": "PASS",
+      "code_evidence": "Option C AUCs: Edge=0.9988, NF=0.9927, ToN=1.0000, CIC=0.9965, Mean=0.9970",
+      "paper_statement": "Paper Table I & Abstract report exact matching values: 0.9988, 0.9927, 1.0000, 0.9965 (Mean 0.9970).",
+      "details": ""
+    }
+  ]
+}

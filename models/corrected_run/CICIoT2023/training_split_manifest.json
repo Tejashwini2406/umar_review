@@ -1,0 +1,50 @@
+{
+  "dataset": "CICIoT2023",
+  "seed": 42,
+  "sample_limit": 50000,
+  "sampling_method": "uniform_reservoir",
+  "temporal_and_behavioral_features_supported": false,
+  "unsupported_state_features": [
+    "temporal_iat_mean",
+    "temporal_iat_cv",
+    "temporal_flow_rate_ewma",
+    "temporal_byte_rate_ewma",
+    "temporal_syn_rate_ewma",
+    "behavioral_dst_diversity",
+    "behavioral_port_entropy",
+    "behavioral_fanout_ratio",
+    "behavioral_unanswered_ratio",
+    "behavioral_src_activity_ewma"
+  ],
+  "split_strategy": "official_source_partitions",
+  "source_partitions": {
+    "train": [
+      "train/train.csv"
+    ],
+    "validation": [
+      "validation/validation.csv"
+    ],
+    "test": [
+      "test/test.csv"
+    ]
+  },
+  "partition_sample_counts": {
+    "train": 30000,
+    "validation": 10000,
+    "test": 10000
+  },
+  "label_counts": {
+    "train": {
+      "benign": 733,
+      "attack": 29267
+    },
+    "validation": {
+      "benign": 204,
+      "attack": 9796
+    },
+    "test": {
+      "benign": 235,
+      "attack": 9765
+    }
+  }
+}

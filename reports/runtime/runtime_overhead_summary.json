@@ -1,0 +1,49 @@
+{
+  "cold_start_latency_ms": 49.16289998800494,
+  "pure_detection_benchmarks": {
+    "1": {
+      "batch_size": 1,
+      "mean_batch_latency_ms": 69.39806667117712,
+      "per_sample_latency_ms": 69.39806667117712,
+      "throughput_samples_per_sec": 14.409623321903387
+    },
+    "32": {
+      "batch_size": 32,
+      "mean_batch_latency_ms": 54.857146668170266,
+      "per_sample_latency_ms": 1.7142858333803208,
+      "throughput_samples_per_sec": 583.3332928080881
+    },
+    "64": {
+      "batch_size": 64,
+      "mean_batch_latency_ms": 46.50834666875502,
+      "per_sample_latency_ms": 0.7266929166992971,
+      "throughput_samples_per_sec": 1376.0970790001472
+    },
+    "128": {
+      "batch_size": 128,
+      "mean_batch_latency_ms": 46.67602667080549,
+      "per_sample_latency_ms": 0.3646564583656679,
+      "throughput_samples_per_sec": 2742.307114158462
+    },
+    "256": {
+      "batch_size": 256,
+      "mean_batch_latency_ms": 61.11303333309479,
+      "per_sample_latency_ms": 0.23872278645740153,
+      "throughput_samples_per_sec": 4188.959147301354
+    },
+    "512": {
+      "batch_size": 512,
+      "mean_batch_latency_ms": 60.88361333046729,
+      "per_sample_latency_ms": 0.11891330728606893,
+      "throughput_samples_per_sec": 8409.487742144005
+    },
+    "1024": {
+      "batch_size": 1024,
+      "mean_batch_latency_ms": 62.042879998140656,
+      "per_sample_latency_ms": 0.060588749998184234,
+      "throughput_samples_per_sec": 16504.714159476283
+    }
+  },
+  "python_version": "3.10.11 (tags/v3.10.11:7d4cc5a, Apr  5 2023, 00:38:17) [MSC v.1929 64 bit (AMD64)]",
+  "torch_version": "2.13.0+cpu"
+}

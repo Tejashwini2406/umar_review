@@ -1,0 +1,42 @@
+{
+  "dataset": "ToN-IoT",
+  "seed": 42,
+  "sample_limit": 10000,
+  "sampling_method": "uniform_reservoir",
+  "temporal_and_behavioral_features_supported": false,
+  "unsupported_state_features": [
+    "temporal_iat_mean",
+    "temporal_iat_cv",
+    "temporal_flow_rate_ewma",
+    "temporal_byte_rate_ewma",
+    "temporal_syn_rate_ewma",
+    "behavioral_dst_diversity",
+    "behavioral_port_entropy",
+    "behavioral_fanout_ratio",
+    "behavioral_unanswered_ratio",
+    "behavioral_src_activity_ewma"
+  ],
+  "split_strategy": "seeded_stratified_random",
+  "source_files": [
+    "train_test_network.csv"
+  ],
+  "split_counts": {
+    "train": 5999,
+    "validation": 1999,
+    "test": 2002
+  },
+  "label_counts": {
+    "train": {
+      "benign": 1476,
+      "attack": 4523
+    },
+    "validation": {
+      "benign": 492,
+      "attack": 1507
+    },
+    "test": {
+      "benign": 493,
+      "attack": 1509
+    }
+  }
+}

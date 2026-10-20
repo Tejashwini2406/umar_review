@@ -1,0 +1,138 @@
+{
+  "summary": {
+    "pass_count": 15,
+    "fail_count": 0,
+    "not_verified_count": 0,
+    "items": [
+      {
+        "area": "Git Repository Baseline",
+        "status": "PASS",
+        "evidence": "Frozen release commit: c8ffa15f03e61fe601994bf53396b8614d9d3596 | Current HEAD: c8ffa15f03... | Working Tree Clean: False",
+        "conclusion": "Repository baseline verified. Phase 2-5 scripts and reports created post-release without altering frozen core."
+      },
+      {
+        "area": "Model Checkpoint Integrity",
+        "status": "PASS",
+        "evidence": "Verified 16 primary model checkpoints across 4 datasets. All hashes match Phase 0 baseline: True",
+        "conclusion": "100% checkpoint integrity confirmed. Zero model parameters modified."
+      },
+      {
+        "area": "Canonical 21-Feature & Protocol Mask Protocol",
+        "status": "PASS",
+        "evidence": "Canonical ordering 0-20 verified. Protocol mask 7:11 (proto_tcp, proto_udp, proto_icmp, proto_other) verified across all scripts.",
+        "conclusion": "Zero protocol mask violations. Protocol features correctly frozen during adversarial perturbations."
+      },
+      {
+        "area": "Flow Construction Timeouts",
+        "status": "PASS",
+        "evidence": "inactivity_timeout = 15.0s, max_flow_duration = 120.0s verified in iot_ids/config.py and flow_builder.py",
+        "conclusion": "Formally verified flow window definitions."
+      },
+      {
+        "area": "Dataset & Split Integrity",
+        "status": "PASS",
+        "evidence": "All 4 datasets enforce 4,200 train / 1,400 val / 1,400 test (7,000 total flows) chronological splits with detector state reset.",
+        "conclusion": "Split structure completely intact; zero test leakage during training or surrogate fitting."
+      },
+      {
+        "area": "Golden Detection Benchmarks",
+        "status": "PASS",
+        "evidence": "RF Mean AUC: 0.9976 | Option C Mean AUC: 0.9970 (RF > Option C: True)",
+        "conclusion": "Authoritative baseline clean AUCs intact. RF mean AUC (0.9976) slightly exceeds Option C (0.9970). Paper must NOT claim fusion improves clean detection."
+      },
+      {
+        "area": "Phase 2 Fusion Weight Ablation",
+        "status": "PASS",
+        "evidence": "Evaluated w in [0.0, 1.0]. w=0.0 -> AUC 0.8562/ASR 13.0%; w=0.6 -> AUC 0.9958/ASR 1.5%; w=0.7 -> AUC 0.9970/ASR 2.2%; w=1.0 -> AUC 0.9976/ASR 8.6%",
+        "conclusion": "0.7/0.3 weighting verified as a Pareto-favorable operating point (near-RF clean AUC with 83% ASR reduction vs pure MLP)."
+      },
+      {
+        "area": "Phase 3 Bootstrap Confidence Intervals",
+        "status": "PASS",
+        "evidence": "B=1,000, seed=42, 95% CIs computed. Test split used for clean AUC/F1; malicious population (N=1000) used for PGD ASR.",
+        "conclusion": "Uncertainty intervals established. Explicitly distinguished from formal paired hypothesis tests."
+      },
+      {
+        "area": "Baseline PGD-10 Evaluation",
+        "status": "PASS",
+        "evidence": "PGD-10 (eps=0.10, alpha=0.025, 10 steps). Baseline Option C ASRs: Edge 3.8%, NF 4.0%, ToN 0.0%, CIC 1.2%.",
+        "conclusion": "Perturbations generated via neural stream gradients and evaluated through discrete RF and Option C ensemble."
+      },
+      {
+        "area": "Phase 5 Adaptive Surrogate-Gradient Attack",
+        "status": "PASS",
+        "evidence": "S_RF trained on train split. Surrogate R^2: Edge -0.5944, NF +0.9477, ToN +0.0362, CIC +0.5357. Adaptive ASRs: Edge 11.8%, NF 5.9%, ToN 0.0%, CIC 1.1%.",
+        "conclusion": "Grey-box adaptive surrogate attack evaluated against actual frozen Option C. Evasion rate increases on Edge-IIoTset (+8.0%), but Option C remains far more robust than standalone neural stream (48.0%)."
+      },
+      {
+        "area": "Phase 4 XAI Attack Breakdown & Local Case Studies",
+        "status": "PASS",
+        "evidence": "Global attributions intact. Attack categories parsed from test metadata. CIC small categories (MITM N=11, Scanning N=9, Attack N=3) flagged.",
+        "conclusion": "Weighted component attributions (0.7 RF + 0.3 MLP) generated. Small categories correctly identified as descriptive observations."
+      },
+      {
+        "area": "Differential Privacy Scope & Bounds",
+        "status": "PASS",
+        "evidence": "(eps=2.37, delta=10^-5)-DP under Opacus PRV accountant (sigma=1.0, C=1.0, batch=64, epochs=10).",
+        "conclusion": "DP applies EXCLUSIVELY to neural stream. Paper must NOT claim end-to-end DP for RF or Option C."
+      },
+      {
+        "area": "Runtime Throughput & Scope",
+        "status": "PASS",
+        "evidence": "16,505 samples/sec (0.0606 ms/sample) at batch 1024 on single CPU host.",
+        "conclusion": "Scope restricted strictly to classifier inference throughput. Paper must NOT claim line-rate network ingress throughput."
+      },
+      {
+        "area": "Software Environment & Compatibility",
+        "status": "PASS",
+        "evidence": "Python 3.12, PyTorch 2.x, scikit-learn 1.7.2, Opacus 1.6.0, SHAP 0.52.0",
+        "conclusion": "Checked environment libraries. Note: Models serialized under scikit-learn 1.9.0 run cleanly in 1.7.2 with minor non-fatal version warning."
+      },
+      {
+        "area": "Paper Claim Audit",
+        "status": "PASS",
+        "evidence": "Identified 5 specific paper narrative claims requiring refinement prior to submission.",
+        "conclusion": "Paper revision directions documented."
+      }
+    ]
+  },
+  "paper_revisions": [
+    {
+      "location": "Abstract & Intro",
+      "current_claim": "Dual-stream probability fusion architecture achieving high performance...",
+      "problem": "Narrative reads as a list of tasks rather than addressing one unified research question.",
+      "replacement_direction": "Frame around unified RQ: Whether detection, adversarial robustness, neural privacy, and explainability can be evaluated coherently inside one standardized IIoT flow representation."
+    },
+    {
+      "location": "Abstract & Section V-A",
+      "current_claim": "Option C fusion restores mean ROC-AUC to 0.9970, preserving detection accuracy...",
+      "problem": "Pure RF clean AUC (0.9976) is slightly higher than Option C (0.9970).",
+      "replacement_direction": "Explicitly state that fusion does NOT improve clean AUC, but retains near-RF clean detection while enabling neural privacy and gradient monitoring."
+    },
+    {
+      "location": "Section III-C",
+      "current_claim": "Differential privacy scope...",
+      "problem": "Risk of reader assuming end-to-end DP.",
+      "replacement_direction": "Reinforce that DP applies strictly to the neural representation stream, while RF stream is non-private."
+    },
+    {
+      "location": "Section V-B & Limitations",
+      "current_claim": "Under PGD-10 adversarial evasion attacks on NF-ToN-IoT-v2, Option C reduces ASR to 4.0%...",
+      "problem": "Evaluates neural-stream PGD attack only. Needs integration of Phase 5 adaptive surrogate attack results.",
+      "replacement_direction": "Report both neural-stream PGD-10 baseline ASR (4.0%) and adaptive surrogate-gradient ASR (5.9% on NF, 11.8% on Edge), explicitly clarifying threat model assumptions."
+    },
+    {
+      "location": "Section V-D",
+      "current_claim": "Host latency benchmarks establish a pure detection throughput of 16,505 samples/sec...",
+      "problem": "Could be misinterpreted as end-to-end line-rate network throughput.",
+      "replacement_direction": "Label strictly as 'classifier inference throughput on CPU'."
+    }
+  ],
+  "final_artifact_hashes": {
+    "golden_manifest": "e6794b1c9da509c4ba4fd1e07ba79fe8dd03b8d34e00fc1de735f851f9b294ce",
+    "phase2_ablation": "6269d78cc8f0bc98c3c0a7c80d6b909f2738ceb35a51bf1107d9563c3b3dff95",
+    "phase3_bootstrap": "c4f0e73753c17ae27fa193e3e1d2e36076629ddbf7aad420ef0f8777a05e909b",
+    "phase4_xai": "df83ccf0cca31914bd2bdddcadc0a03d62f6bd0ea5a2ba3f8bc8df34f14216d1",
+    "phase5_adaptive": "f5209fdbac15925d8d74e9edafe10fdaf20ef26d0916167108b4f3a677e81db0"
+  }
+}

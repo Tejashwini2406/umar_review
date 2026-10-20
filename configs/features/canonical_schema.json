@@ -1,0 +1,83 @@
+{
+  "version": "final-features-v2",
+  "strategy": {
+    "cross_dataset_primary": "Strict 6-feature F_common (100% semantically harmonized physical network quantities)",
+    "ablation_groups": ["common", "temporal", "behavioral", "dataset_specific"]
+  },
+  "profiles": {
+    "F_COMMON": [
+      "duration",
+      "src_bytes",
+      "proto_tcp",
+      "proto_udp",
+      "proto_icmp",
+      "is_well_known_port"
+    ],
+    "IN_DOMAIN_EDGE_IIOT": [
+      "duration",
+      "src_bytes",
+      "proto_tcp",
+      "proto_udp",
+      "proto_icmp",
+      "is_well_known_port",
+      "temporal_causal_count",
+      "temporal_causal_rate",
+      "temporal_iat_mean",
+      "behavioral_dest_diversity",
+      "behavioral_src_activity",
+      "mqtt_msgtype",
+      "mbtcp_unit_id"
+    ],
+    "IN_DOMAIN_TON_IOT": [
+      "duration",
+      "src_bytes",
+      "proto_tcp",
+      "proto_udp",
+      "proto_icmp",
+      "is_well_known_port",
+      "temporal_causal_count",
+      "temporal_causal_rate",
+      "temporal_iat_mean",
+      "behavioral_dest_diversity",
+      "behavioral_src_activity",
+      "conn_state_encoded",
+      "http_method_encoded"
+    ],
+    "STANDARDIZED_21_MULTILEVEL": [
+      "flow_duration",
+      "flow_bytes_per_sec",
+      "flow_pkts_per_sec",
+      "mean_pkt_size",
+      "payload_byte_ratio",
+      "pkt_count_ratio",
+      "tcp_syn_ratio",
+      "proto_tcp",
+      "proto_udp",
+      "proto_icmp",
+      "proto_other",
+      "temporal_iat_mean",
+      "temporal_iat_cv",
+      "temporal_flow_rate_ewma",
+      "temporal_byte_rate_ewma",
+      "temporal_syn_rate_ewma",
+      "behavioral_dst_diversity",
+      "behavioral_port_entropy",
+      "behavioral_fanout_ratio",
+      "behavioral_unanswered_ratio",
+      "behavioral_src_activity_ewma"
+    ]
+  },
+  "features": [
+    {"name": "duration", "dtype": "float64", "level": "common", "semantic_definition": "Flow / interaction duration in seconds.", "units": "seconds", "transformation": "log1p + RobustScaler", "availability": {"Edge-IIoTset": ["udp.time_delta"], "ToN-IoT": ["duration"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "src_bytes", "dtype": "float64", "level": "common", "semantic_definition": "Payload bytes sent by source entity.", "units": "bytes", "transformation": "log1p + RobustScaler", "availability": {"Edge-IIoTset": ["tcp.len"], "ToN-IoT": ["src_bytes"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "proto_tcp", "dtype": "float64", "level": "common", "semantic_definition": "Binary indicator for TCP protocol.", "units": "binary (0/1)", "transformation": "Binary indicator", "availability": {"Edge-IIoTset": ["tcp.srcport"], "ToN-IoT": ["proto"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "proto_udp", "dtype": "float64", "level": "common", "semantic_definition": "Binary indicator for UDP protocol.", "units": "binary (0/1)", "transformation": "Binary indicator", "availability": {"Edge-IIoTset": ["udp.port"], "ToN-IoT": ["proto"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "proto_icmp", "dtype": "float64", "level": "common", "semantic_definition": "Binary indicator for ICMP protocol.", "units": "binary (0/1)", "transformation": "Binary indicator", "availability": {"Edge-IIoTset": ["icmp.checksum"], "ToN-IoT": ["proto"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "is_well_known_port", "dtype": "float64", "level": "common", "semantic_definition": "Binary indicator if destination transport port is < 1024.", "units": "binary (0/1)", "transformation": "Binary indicator", "availability": {"Edge-IIoTset": ["tcp.dstport"], "ToN-IoT": ["dst_port"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "both"},
+    {"name": "temporal_causal_count", "dtype": "float64", "level": "temporal", "semantic_definition": "Causal rolling count of interactions from source entity.", "units": "count", "transformation": "Rolling sum", "availability": {"Edge-IIoTset": ["ip.src_host"], "ToN-IoT": ["src_ip"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "in_domain"},
+    {"name": "temporal_causal_rate", "dtype": "float64", "level": "temporal", "semantic_definition": "Causal interaction arrival rate.", "units": "interactions/second", "transformation": "Count / Duration", "availability": {"Edge-IIoTset": ["ip.src_host"], "ToN-IoT": ["src_ip"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "in_domain"},
+    {"name": "temporal_iat_mean", "dtype": "float64", "level": "temporal", "semantic_definition": "Mean inter-arrival time between consecutive interactions.", "units": "seconds", "transformation": "Duration / Count", "availability": {"Edge-IIoTset": ["ip.src_host"], "ToN-IoT": ["src_ip"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "in_domain"},
+    {"name": "behavioral_dest_diversity", "dtype": "float64", "level": "behavioral", "semantic_definition": "Cumulative unique destination IPs targeted by source IP.", "units": "count", "transformation": "Unique destination set size", "availability": {"Edge-IIoTset": ["ip.dst_host"], "ToN-IoT": ["dst_ip"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "in_domain"},
+    {"name": "behavioral_src_activity", "dtype": "float64", "level": "behavioral", "semantic_definition": "Cumulative interaction initiation frequency per source IP.", "units": "count", "transformation": "Source frequency count", "availability": {"Edge-IIoTset": ["ip.src_host"], "ToN-IoT": ["src_ip"]}, "missing_behavior": "Impute 0.0", "leakage_role": "SAFE_FEATURE", "valid_for": "in_domain"}
+  ]
+}

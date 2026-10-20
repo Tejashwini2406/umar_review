@@ -1,0 +1,91 @@
+# Local environments
+.venv/
+.venv-1/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Dataset inputs, generated data, and local artifacts
+data/raw/**
+data/interim/**
+data/processed/**
+data/cache/**
+artifacts/**
+
+# Keep directory placeholders
+!data/raw/.gitkeep
+!data/interim/.gitkeep
+!data/processed/.gitkeep
+!data/cache/.gitkeep
+!artifacts/.gitkeep
+
+# Generated local execution alert logs, figures, & temporary outputs
+reports/*.jsonl
+reports/*.json
+reports/*.csv
+reports/*.md
+reports/figures/
+reports/stage1_ingestion_audit.md
+reports/stage2_*
+reports/stage3_*
+reports/stage4_*
+reports/stage7/
+reports/stage8/
+reports/stage10/
+
+# Keep authoritative golden run manifest
+!reports/golden_run_manifest.json
+
+# Keep authoritative final release reports and research evidence stages
+!reports/final/
+!reports/final/**
+!reports/stage4/
+!reports/stage4/**
+!reports/stage5/
+!reports/stage5/**
+!reports/stage6/
+!reports/stage6/**
+!reports/stage9/
+!reports/stage9/**
+!reports/stage11/
+!reports/stage11/**
+!reports/stage12/
+!reports/stage12/**
+
+# Local scratch directories, exploratory papers, & zip archives
+scratch/
+conference_latex_template/
+paper_support/
+implementation_paper/
+An_Adversarially_Robust_and_Privacy_Preserving_AI_Framework_for_Explainable_Intrusion_Detection_in_IoT_Environments*    
+notebooks/
+
+# Obsolete shareable package (superseded by repository)
+P1_Task_Implementation_Shareable_Codebase.zip
+
+# Local secrets/config
+.env
+.env.*
+!.env.example
+
+# IDE state and AI agent workspace files
+.gemini/
+.vscode/
+.idea/
+
+# Temporary execution logs & local text outputs
+*.log
+verification_output*.txt
+evidence_output*.txt
+
+# Binary model checkpoints and sample packet captures
+*.joblib
+*.pt
+*.pcap
+
+# Verification-only retraining artifacts
+models/verification_retrain/

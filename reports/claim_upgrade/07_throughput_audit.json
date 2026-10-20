@@ -1,0 +1,36 @@
+{
+  "original_benchmark_claims": {
+    "throughput_samples_sec": 16504.714159476283,
+    "latency_ms_per_sample": 0.060588749998184234,
+    "batch_size_used": 1024
+  },
+  "path_analysis": {
+    "evaluated_component": "InferenceEngine.predict()",
+    "excluded_stages": [
+      "PCAP/Network I/O reading",
+      "Scapy packet parsing",
+      "Flow aggregation and state tracking",
+      "Feature extraction (inter-arrival times, stats)",
+      "Alert delivery to sinks (Elasticsearch, webhooks)"
+    ],
+    "included_stages": [
+      "Dictionary schema validation",
+      "RobustScaler transform",
+      "RandomForest predict_proba",
+      "RobustMLP PyTorch forward pass",
+      "Probability fusion (0.7 RF + 0.3 MLP)",
+      "Alert dict construction"
+    ],
+    "input_type": "Pre-constructed in-memory Python dictionary of 21 canonical features"
+  },
+  "pcap_smoke_test_artifacts": {
+    "artifact_file": "reports/pcap_alerts.json",
+    "total_alerts_recorded": 6,
+    "unique_flows_alerted": 1,
+    "contains_packet_counts": false,
+    "contains_latency_stats": false,
+    "contains_errors": false
+  },
+  "verdict": "FAIL",
+  "justification": "The reported 16,505 samples/sec throughput strictly measures batched, in-memory, classifier-only offline inference. It explicitly bypasses network ingestion, packet parsing, stateful flow aggregation, and feature extraction. Presenting this as end-to-end IDS throughput is mathematically and architecturally incorrect."
+}

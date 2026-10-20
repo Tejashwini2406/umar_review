@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  iot-ids-edge:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: iot_ids_edge_sensor
+    restart: unless-stopped
+    volumes:
+      - ./models:/app/models
+      - ./reports:/app/reports
+      - ./data:/app/data
+    environment:
+      - PYTHONPATH=/app/src
+    command: ["validate", "--artifact-dir", "models/final/deployable_artifact", "--test-domain", "ToN-IoT"]

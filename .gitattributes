@@ -1,2 +1,4 @@
-# Auto detect text files and perform LF normalization
-* text=auto
+data/raw/CICIOT23/test/test.csv filter=lfs diff=lfs merge=lfs -text
+data/raw/CICIOT23/train/train.csv filter=lfs diff=lfs merge=lfs -text
+data/raw/CICIOT23/validation/validation.csv filter=lfs diff=lfs merge=lfs -text
+data/raw/NF-ToN-IoT-v2/NF-ToN-IoT-V2.parquet filter=lfs diff=lfs merge=lfs -text

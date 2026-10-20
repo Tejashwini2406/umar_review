@@ -1,0 +1,31 @@
+{
+  "dataset": "Edge-IIoTset",
+  "seed": 42,
+  "sample_limit": 10000,
+  "sampling_method": "uniform_reservoir",
+  "temporal_and_behavioral_features_supported": true,
+  "unsupported_state_features": [],
+  "split_strategy": "seeded_stratified_random",
+  "source_files": [
+    "Edge-IIoTset dataset/Selected dataset for ML and DL/ML-EdgeIIoT-dataset.csv"
+  ],
+  "split_counts": {
+    "train": 6000,
+    "validation": 2000,
+    "test": 2000
+  },
+  "label_counts": {
+    "train": {
+      "benign": 894,
+      "attack": 5106
+    },
+    "validation": {
+      "benign": 298,
+      "attack": 1702
+    },
+    "test": {
+      "benign": 298,
+      "attack": 1702
+    }
+  }
+}

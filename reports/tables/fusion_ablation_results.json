@@ -1,0 +1,452 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T21:05:00Z",
+    "git_commit": "c8ffa15f03e61fe601994bf53396b8614d9d3596",
+    "seed": 42,
+    "datasets": [
+      "Edge-IIoTset",
+      "NF-ToN-IoT-v2",
+      "ToN-IoT",
+      "CICIoT2023"
+    ],
+    "weights_evaluated": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9,
+      1.0
+    ],
+    "checkpoint_hashes": {
+      "Edge-IIoTset": {
+        "rf_model.joblib": "a3fb7b281aeed5a6d52501604ad329b17a6198e4f1c00a9b9e2766d94f896567",
+        "mlp_rob.pt": "17517a3560b00dbd79925441aada5a0c4e0ff5bcfbe88cde869d5ecfc7888ab8",
+        "scaler.joblib": "8357c1de53e9f9426f771d11fdd9a737149eeac09c3118f9d3d33d0627ac744b"
+      },
+      "NF-ToN-IoT-v2": {
+        "rf_model.joblib": "08468974a1359ecc439e7d76ee58fae740d4c69409a5d6c4a58636f89130f966",
+        "mlp_rob.pt": "6f9ddae1b3ee44ceffe108b89c46ac0e3f7f8c8c0e50963712f9ba41db5ec4dd",
+        "scaler.joblib": "4f6e6c6639664efd08aaaaa8444f29c7a559bd87679c13102b64f808eae34ec3"
+      },
+      "ToN-IoT": {
+        "rf_model.joblib": "0996ca773131c8af6b0a57d420bfdf973d898bc13299fa9a9b2e17675fbaa2ab",
+        "mlp_rob.pt": "f895f4756dfac7a147094aa989072d47c911750b9998c56f159a702a8a55e403",
+        "scaler.joblib": "8aad924bb0fe8bb0ff0bf651906ceafd7acf4540bd42c15d621f3d2e8e3376a8"
+      },
+      "CICIoT2023": {
+        "rf_model.joblib": "0431bafb77c93d8614677d698e8fa74c203e44579805ab55a6b0107d65af0724",
+        "mlp_rob.pt": "86abe2a6146220b9b4168dbce908df0cf1e3d2bef3819e2e158c627de562f72d",
+        "scaler.joblib": "2759b776bcc5fe9777db66709efd03508333bd3aead30ac3a35f2715c7741349"
+      }
+    },
+    "weight_selection_policy": "Predetermined 0.7/0.3 Option C baseline evaluated empirically against full grid",
+    "metric_definitions": {
+      "clean_roc_auc": "Receiver Operating Characteristic AUC on held-out clean test split",
+      "clean_macro_f1": "Macro-averaged F1 score at decision threshold 0.5 on clean test split",
+      "pgd10_asr": "Attack Success Rate (fraction of malicious test flows misclassified as benign under PGD-10 eps=0.10, alpha=0.025 attack on neural stream)"
+    },
+    "adversarial_sample_generation": "Regenerated deterministically using seed=42 and frozen PGD-10 pipeline parameters"
+  },
+  "by_dataset": {
+    "Edge-IIoTset": [
+      {
+        "weight_rf": 0.0,
+        "weight_mlp": 1.0,
+        "clean_roc_auc": 0.800177,
+        "clean_macro_f1": 0.416667,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.1,
+        "weight_mlp": 0.9,
+        "clean_roc_auc": 0.99707,
+        "clean_macro_f1": 0.416667,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.2,
+        "weight_mlp": 0.8,
+        "clean_roc_auc": 0.99707,
+        "clean_macro_f1": 0.416667,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.3,
+        "weight_mlp": 0.7,
+        "clean_roc_auc": 0.99707,
+        "clean_macro_f1": 0.947965,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.4,
+        "weight_mlp": 0.6,
+        "clean_roc_auc": 0.99707,
+        "clean_macro_f1": 0.991224,
+        "pgd10_asr": 0.002
+      },
+      {
+        "weight_rf": 0.5,
+        "weight_mlp": 0.5,
+        "clean_roc_auc": 0.997072,
+        "clean_macro_f1": 0.99387,
+        "pgd10_asr": 0.004
+      },
+      {
+        "weight_rf": 0.6,
+        "weight_mlp": 0.4,
+        "clean_roc_auc": 0.997115,
+        "clean_macro_f1": 0.986124,
+        "pgd10_asr": 0.006
+      },
+      {
+        "weight_rf": 0.7,
+        "weight_mlp": 0.3,
+        "clean_roc_auc": 0.998752,
+        "clean_macro_f1": 0.975118,
+        "pgd10_asr": 0.038
+      },
+      {
+        "weight_rf": 0.8,
+        "weight_mlp": 0.2,
+        "clean_roc_auc": 0.999208,
+        "clean_macro_f1": 0.93363,
+        "pgd10_asr": 0.206
+      },
+      {
+        "weight_rf": 0.9,
+        "weight_mlp": 0.1,
+        "clean_roc_auc": 0.999325,
+        "clean_macro_f1": 0.908174,
+        "pgd10_asr": 0.246
+      },
+      {
+        "weight_rf": 1.0,
+        "weight_mlp": 0.0,
+        "clean_roc_auc": 0.999478,
+        "clean_macro_f1": 0.901358,
+        "pgd10_asr": 0.294
+      }
+    ],
+    "NF-ToN-IoT-v2": [
+      {
+        "weight_rf": 0.0,
+        "weight_mlp": 1.0,
+        "clean_roc_auc": 0.829925,
+        "clean_macro_f1": 0.57903,
+        "pgd10_asr": 0.48
+      },
+      {
+        "weight_rf": 0.1,
+        "weight_mlp": 0.9,
+        "clean_roc_auc": 0.858748,
+        "clean_macro_f1": 0.858502,
+        "pgd10_asr": 0.478
+      },
+      {
+        "weight_rf": 0.2,
+        "weight_mlp": 0.8,
+        "clean_roc_auc": 0.952825,
+        "clean_macro_f1": 0.872148,
+        "pgd10_asr": 0.072
+      },
+      {
+        "weight_rf": 0.3,
+        "weight_mlp": 0.7,
+        "clean_roc_auc": 0.977967,
+        "clean_macro_f1": 0.911479,
+        "pgd10_asr": 0.072
+      },
+      {
+        "weight_rf": 0.4,
+        "weight_mlp": 0.6,
+        "clean_roc_auc": 0.984364,
+        "clean_macro_f1": 0.915558,
+        "pgd10_asr": 0.067
+      },
+      {
+        "weight_rf": 0.5,
+        "weight_mlp": 0.5,
+        "clean_roc_auc": 0.989335,
+        "clean_macro_f1": 0.915558,
+        "pgd10_asr": 0.052
+      },
+      {
+        "weight_rf": 0.6,
+        "weight_mlp": 0.4,
+        "clean_roc_auc": 0.989803,
+        "clean_macro_f1": 0.926481,
+        "pgd10_asr": 0.041
+      },
+      {
+        "weight_rf": 0.7,
+        "weight_mlp": 0.3,
+        "clean_roc_auc": 0.992671,
+        "clean_macro_f1": 0.928471,
+        "pgd10_asr": 0.04
+      },
+      {
+        "weight_rf": 0.8,
+        "weight_mlp": 0.2,
+        "clean_roc_auc": 0.992668,
+        "clean_macro_f1": 0.930452,
+        "pgd10_asr": 0.04
+      },
+      {
+        "weight_rf": 0.9,
+        "weight_mlp": 0.1,
+        "clean_roc_auc": 0.993225,
+        "clean_macro_f1": 0.988547,
+        "pgd10_asr": 0.039
+      },
+      {
+        "weight_rf": 1.0,
+        "weight_mlp": 0.0,
+        "clean_roc_auc": 0.993996,
+        "clean_macro_f1": 0.990324,
+        "pgd10_asr": 0.033
+      }
+    ],
+    "ToN-IoT": [
+      {
+        "weight_rf": 0.0,
+        "weight_mlp": 1.0,
+        "clean_roc_auc": 0.80629,
+        "clean_macro_f1": 0.550811,
+        "pgd10_asr": 0.025
+      },
+      {
+        "weight_rf": 0.1,
+        "weight_mlp": 0.9,
+        "clean_roc_auc": 0.969675,
+        "clean_macro_f1": 0.589671,
+        "pgd10_asr": 0.018
+      },
+      {
+        "weight_rf": 0.2,
+        "weight_mlp": 0.8,
+        "clean_roc_auc": 0.98356,
+        "clean_macro_f1": 0.611649,
+        "pgd10_asr": 0.012
+      },
+      {
+        "weight_rf": 0.3,
+        "weight_mlp": 0.7,
+        "clean_roc_auc": 0.99536,
+        "clean_macro_f1": 0.990397,
+        "pgd10_asr": 0.007
+      },
+      {
+        "weight_rf": 0.4,
+        "weight_mlp": 0.6,
+        "clean_roc_auc": 0.999985,
+        "clean_macro_f1": 0.997377,
+        "pgd10_asr": 0.004
+      },
+      {
+        "weight_rf": 0.5,
+        "weight_mlp": 0.5,
+        "clean_roc_auc": 0.999997,
+        "clean_macro_f1": 0.999124,
+        "pgd10_asr": 0.001
+      },
+      {
+        "weight_rf": 0.6,
+        "weight_mlp": 0.4,
+        "clean_roc_auc": 1.0,
+        "clean_macro_f1": 1.0,
+        "pgd10_asr": 0.001
+      },
+      {
+        "weight_rf": 0.7,
+        "weight_mlp": 0.3,
+        "clean_roc_auc": 1.0,
+        "clean_macro_f1": 1.0,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.8,
+        "weight_mlp": 0.2,
+        "clean_roc_auc": 1.0,
+        "clean_macro_f1": 1.0,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 0.9,
+        "weight_mlp": 0.1,
+        "clean_roc_auc": 1.0,
+        "clean_macro_f1": 1.0,
+        "pgd10_asr": 0.0
+      },
+      {
+        "weight_rf": 1.0,
+        "weight_mlp": 0.0,
+        "clean_roc_auc": 1.0,
+        "clean_macro_f1": 1.0,
+        "pgd10_asr": 0.0
+      }
+    ],
+    "CICIoT2023": [
+      {
+        "weight_rf": 0.0,
+        "weight_mlp": 1.0,
+        "clean_roc_auc": 0.988443,
+        "clean_macro_f1": 0.919751,
+        "pgd10_asr": 0.013
+      },
+      {
+        "weight_rf": 0.1,
+        "weight_mlp": 0.9,
+        "clean_roc_auc": 0.993367,
+        "clean_macro_f1": 0.919751,
+        "pgd10_asr": 0.014
+      },
+      {
+        "weight_rf": 0.2,
+        "weight_mlp": 0.8,
+        "clean_roc_auc": 0.994565,
+        "clean_macro_f1": 0.920743,
+        "pgd10_asr": 0.014
+      },
+      {
+        "weight_rf": 0.3,
+        "weight_mlp": 0.7,
+        "clean_roc_auc": 0.995207,
+        "clean_macro_f1": 0.922586,
+        "pgd10_asr": 0.014
+      },
+      {
+        "weight_rf": 0.4,
+        "weight_mlp": 0.6,
+        "clean_roc_auc": 0.995653,
+        "clean_macro_f1": 0.926401,
+        "pgd10_asr": 0.013
+      },
+      {
+        "weight_rf": 0.5,
+        "weight_mlp": 0.5,
+        "clean_roc_auc": 0.995988,
+        "clean_macro_f1": 0.927257,
+        "pgd10_asr": 0.012
+      },
+      {
+        "weight_rf": 0.6,
+        "weight_mlp": 0.4,
+        "clean_roc_auc": 0.996293,
+        "clean_macro_f1": 0.927257,
+        "pgd10_asr": 0.012
+      },
+      {
+        "weight_rf": 0.7,
+        "weight_mlp": 0.3,
+        "clean_roc_auc": 0.996502,
+        "clean_macro_f1": 0.929222,
+        "pgd10_asr": 0.012
+      },
+      {
+        "weight_rf": 0.8,
+        "weight_mlp": 0.2,
+        "clean_roc_auc": 0.996583,
+        "clean_macro_f1": 0.935074,
+        "pgd10_asr": 0.012
+      },
+      {
+        "weight_rf": 0.9,
+        "weight_mlp": 0.1,
+        "clean_roc_auc": 0.996727,
+        "clean_macro_f1": 0.933131,
+        "pgd10_asr": 0.013
+      },
+      {
+        "weight_rf": 1.0,
+        "weight_mlp": 0.0,
+        "clean_roc_auc": 0.9968,
+        "clean_macro_f1": 0.937657,
+        "pgd10_asr": 0.015
+      }
+    ]
+  },
+  "mean_across_datasets": [
+    {
+      "weight_rf": 0.0,
+      "weight_mlp": 1.0,
+      "mean_clean_roc_auc": 0.856209,
+      "mean_clean_macro_f1": 0.616565,
+      "mean_pgd10_asr": 0.1295
+    },
+    {
+      "weight_rf": 0.1,
+      "weight_mlp": 0.9,
+      "mean_clean_roc_auc": 0.954715,
+      "mean_clean_macro_f1": 0.696148,
+      "mean_pgd10_asr": 0.1275
+    },
+    {
+      "weight_rf": 0.2,
+      "weight_mlp": 0.8,
+      "mean_clean_roc_auc": 0.982005,
+      "mean_clean_macro_f1": 0.705302,
+      "mean_pgd10_asr": 0.0245
+    },
+    {
+      "weight_rf": 0.3,
+      "weight_mlp": 0.7,
+      "mean_clean_roc_auc": 0.991401,
+      "mean_clean_macro_f1": 0.943107,
+      "mean_pgd10_asr": 0.02325
+    },
+    {
+      "weight_rf": 0.4,
+      "weight_mlp": 0.6,
+      "mean_clean_roc_auc": 0.994268,
+      "mean_clean_macro_f1": 0.95764,
+      "mean_pgd10_asr": 0.0215
+    },
+    {
+      "weight_rf": 0.5,
+      "weight_mlp": 0.5,
+      "mean_clean_roc_auc": 0.995598,
+      "mean_clean_macro_f1": 0.958952,
+      "mean_pgd10_asr": 0.01725
+    },
+    {
+      "weight_rf": 0.6,
+      "weight_mlp": 0.4,
+      "mean_clean_roc_auc": 0.995803,
+      "mean_clean_macro_f1": 0.959966,
+      "mean_pgd10_asr": 0.015
+    },
+    {
+      "weight_rf": 0.7,
+      "weight_mlp": 0.3,
+      "mean_clean_roc_auc": 0.996981,
+      "mean_clean_macro_f1": 0.958203,
+      "mean_pgd10_asr": 0.0225
+    },
+    {
+      "weight_rf": 0.8,
+      "weight_mlp": 0.2,
+      "mean_clean_roc_auc": 0.997115,
+      "mean_clean_macro_f1": 0.949789,
+      "mean_pgd10_asr": 0.0645
+    },
+    {
+      "weight_rf": 0.9,
+      "weight_mlp": 0.1,
+      "mean_clean_roc_auc": 0.997319,
+      "mean_clean_macro_f1": 0.957463,
+      "mean_pgd10_asr": 0.0745
+    },
+    {
+      "weight_rf": 1.0,
+      "weight_mlp": 0.0,
+      "mean_clean_roc_auc": 0.997568,
+      "mean_clean_macro_f1": 0.957335,
+      "mean_pgd10_asr": 0.0855
+    }
+  ]
+}

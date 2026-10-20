@@ -1,0 +1,501 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T21:20:00Z",
+    "git_commit": "c8ffa15f03e61fe601994bf53396b8614d9d3596",
+    "seed": 42,
+    "datasets": [
+      "Edge-IIoTset",
+      "NF-ToN-IoT-v2",
+      "ToN-IoT",
+      "CICIoT2023"
+    ],
+    "xai_methodology": "Weighted Component Attribution Aggregation (0.7 * RF_norm + 0.3 * MLP_norm)",
+    "clarification": "Component-level weighted attribution; explicitly NOT exact game-theoretic SHAP for the non-linear fused predictor.",
+    "normalization_procedure": "L1 norm normalization per stream prior to weighted aggregation",
+    "selection_rule_local_cases": "First malicious test flow (y=1) per primary attack category satisfying Option C confidence >= 0.95"
+  },
+  "attack_category_breakdown": {
+    "Edge-IIoTset": {
+      "Injection": {
+        "sample_count": 1000,
+        "is_statistically_generalizable": true,
+        "top_3_features": [
+          {
+            "feature": "behavioral_unanswered_ratio",
+            "combined_weight": 0.219413,
+            "rf_weight": 0.306629,
+            "mlp_weight": 0.015907
+          },
+          {
+            "feature": "behavioral_port_entropy",
+            "combined_weight": 0.189416,
+            "rf_weight": 0.268405,
+            "mlp_weight": 0.005109
+          },
+          {
+            "feature": "behavioral_dst_diversity",
+            "combined_weight": 0.137444,
+            "rf_weight": 0.176089,
+            "mlp_weight": 0.047273
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.000262,
+          "flow_bytes_per_sec": 0.076122,
+          "flow_pkts_per_sec": 0.017582,
+          "mean_pkt_size": 0.078106,
+          "payload_byte_ratio": 0.012625,
+          "pkt_count_ratio": 0.00426,
+          "tcp_syn_ratio": 0.0,
+          "proto_tcp": 0.000516,
+          "proto_udp": 9.6e-05,
+          "proto_icmp": 1.9e-05,
+          "proto_other": 0.000268,
+          "temporal_iat_mean": 0.005842,
+          "temporal_iat_cv": 0.005313,
+          "temporal_flow_rate_ewma": 0.11558,
+          "temporal_byte_rate_ewma": 0.104284,
+          "temporal_syn_rate_ewma": 0.0,
+          "behavioral_dst_diversity": 0.137444,
+          "behavioral_port_entropy": 0.189416,
+          "behavioral_fanout_ratio": 0.031471,
+          "behavioral_unanswered_ratio": 0.219413,
+          "behavioral_src_activity_ewma": 0.001383
+        }
+      }
+    },
+    "NF-ToN-IoT-v2": {
+      "Scanning": {
+        "sample_count": 1000,
+        "is_statistically_generalizable": true,
+        "top_3_features": [
+          {
+            "feature": "mean_pkt_size",
+            "combined_weight": 0.138186,
+            "rf_weight": 0.195622,
+            "mlp_weight": 0.004167
+          },
+          {
+            "feature": "temporal_flow_rate_ewma",
+            "combined_weight": 0.119302,
+            "rf_weight": 0.033349,
+            "mlp_weight": 0.319857
+          },
+          {
+            "feature": "flow_bytes_per_sec",
+            "combined_weight": 0.113576,
+            "rf_weight": 0.162166,
+            "mlp_weight": 0.0002
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.00388,
+          "flow_bytes_per_sec": 0.113576,
+          "flow_pkts_per_sec": 0.021268,
+          "mean_pkt_size": 0.138186,
+          "payload_byte_ratio": 0.063037,
+          "pkt_count_ratio": 0.026645,
+          "tcp_syn_ratio": 0.022309,
+          "proto_tcp": 0.006593,
+          "proto_udp": 0.006117,
+          "proto_icmp": 0.000355,
+          "proto_other": 0.0,
+          "temporal_iat_mean": 0.077779,
+          "temporal_iat_cv": 0.094769,
+          "temporal_flow_rate_ewma": 0.119302,
+          "temporal_byte_rate_ewma": 0.05318,
+          "temporal_syn_rate_ewma": 0.033691,
+          "behavioral_dst_diversity": 0.049699,
+          "behavioral_port_entropy": 0.02201,
+          "behavioral_fanout_ratio": 0.03024,
+          "behavioral_unanswered_ratio": 0.053719,
+          "behavioral_src_activity_ewma": 0.063646
+        }
+      }
+    },
+    "ToN-IoT": {
+      "Backdoor": {
+        "sample_count": 1000,
+        "is_statistically_generalizable": true,
+        "top_3_features": [
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.303459,
+            "rf_weight": 0.004942,
+            "mlp_weight": 1.0
+          },
+          {
+            "feature": "temporal_syn_rate_ewma",
+            "combined_weight": 0.152845,
+            "rf_weight": 0.21835,
+            "mlp_weight": 0.0
+          },
+          {
+            "feature": "flow_duration",
+            "combined_weight": 0.111154,
+            "rf_weight": 0.158792,
+            "mlp_weight": 0.0
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.111154,
+          "flow_bytes_per_sec": 0.003641,
+          "flow_pkts_per_sec": 0.038373,
+          "mean_pkt_size": 0.003832,
+          "payload_byte_ratio": 0.002346,
+          "pkt_count_ratio": 0.101635,
+          "tcp_syn_ratio": 0.05234,
+          "proto_tcp": 0.033102,
+          "proto_udp": 0.032454,
+          "proto_icmp": 0.000112,
+          "proto_other": 0.0,
+          "temporal_iat_mean": 0.003913,
+          "temporal_iat_cv": 0.000456,
+          "temporal_flow_rate_ewma": 0.020771,
+          "temporal_byte_rate_ewma": 0.012694,
+          "temporal_syn_rate_ewma": 0.152845,
+          "behavioral_dst_diversity": 0.002499,
+          "behavioral_port_entropy": 0.046012,
+          "behavioral_fanout_ratio": 0.001289,
+          "behavioral_unanswered_ratio": 0.077072,
+          "behavioral_src_activity_ewma": 0.303459
+        }
+      }
+    },
+    "CICIoT2023": {
+      "DDoS": {
+        "sample_count": 770,
+        "is_statistically_generalizable": true,
+        "top_3_features": [
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.240938,
+            "rf_weight": 0.226738,
+            "mlp_weight": 0.274073
+          },
+          {
+            "feature": "mean_pkt_size",
+            "combined_weight": 0.136959,
+            "rf_weight": 0.155878,
+            "mlp_weight": 0.092817
+          },
+          {
+            "feature": "temporal_iat_mean",
+            "combined_weight": 0.124104,
+            "rf_weight": 0.107255,
+            "mlp_weight": 0.163417
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.107553,
+          "flow_bytes_per_sec": 0.051258,
+          "flow_pkts_per_sec": 0.118888,
+          "mean_pkt_size": 0.136959,
+          "payload_byte_ratio": 0.066626,
+          "pkt_count_ratio": 0.035804,
+          "tcp_syn_ratio": 0.014414,
+          "proto_tcp": 0.003354,
+          "proto_udp": 0.004247,
+          "proto_icmp": 0.002361,
+          "proto_other": 0.017666,
+          "temporal_iat_mean": 0.124104,
+          "temporal_iat_cv": 0.043822,
+          "temporal_flow_rate_ewma": 0.009714,
+          "temporal_byte_rate_ewma": 0.013824,
+          "temporal_syn_rate_ewma": 0.008468,
+          "behavioral_dst_diversity": 0.0,
+          "behavioral_port_entropy": 0.0,
+          "behavioral_fanout_ratio": 0.0,
+          "behavioral_unanswered_ratio": 0.0,
+          "behavioral_src_activity_ewma": 0.240938
+        }
+      },
+      "DoS": {
+        "sample_count": 207,
+        "is_statistically_generalizable": true,
+        "top_3_features": [
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.242539,
+            "rf_weight": 0.226738,
+            "mlp_weight": 0.279408
+          },
+          {
+            "feature": "temporal_iat_mean",
+            "combined_weight": 0.126292,
+            "rf_weight": 0.107255,
+            "mlp_weight": 0.17071
+          },
+          {
+            "feature": "flow_duration",
+            "combined_weight": 0.12275,
+            "rf_weight": 0.124788,
+            "mlp_weight": 0.117993
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.12275,
+          "flow_bytes_per_sec": 0.049889,
+          "flow_pkts_per_sec": 0.117573,
+          "mean_pkt_size": 0.113083,
+          "payload_byte_ratio": 0.056847,
+          "pkt_count_ratio": 0.035775,
+          "tcp_syn_ratio": 0.014632,
+          "proto_tcp": 0.005525,
+          "proto_udp": 0.004127,
+          "proto_icmp": 0.000549,
+          "proto_other": 0.014767,
+          "temporal_iat_mean": 0.126292,
+          "temporal_iat_cv": 0.063775,
+          "temporal_flow_rate_ewma": 0.009191,
+          "temporal_byte_rate_ewma": 0.015027,
+          "temporal_syn_rate_ewma": 0.007662,
+          "behavioral_dst_diversity": 0.0,
+          "behavioral_port_entropy": 0.0,
+          "behavioral_fanout_ratio": 0.0,
+          "behavioral_unanswered_ratio": 0.0,
+          "behavioral_src_activity_ewma": 0.242539
+        }
+      },
+      "MITM": {
+        "sample_count": 11,
+        "is_statistically_generalizable": false,
+        "top_3_features": [
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.244255,
+            "rf_weight": 0.226738,
+            "mlp_weight": 0.285127
+          },
+          {
+            "feature": "mean_pkt_size",
+            "combined_weight": 0.169365,
+            "rf_weight": 0.155878,
+            "mlp_weight": 0.200837
+          },
+          {
+            "feature": "temporal_iat_mean",
+            "combined_weight": 0.120253,
+            "rf_weight": 0.107255,
+            "mlp_weight": 0.150579
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.108183,
+          "flow_bytes_per_sec": 0.048408,
+          "flow_pkts_per_sec": 0.116354,
+          "mean_pkt_size": 0.169365,
+          "payload_byte_ratio": 0.062197,
+          "pkt_count_ratio": 0.035769,
+          "tcp_syn_ratio": 0.017245,
+          "proto_tcp": 0.010387,
+          "proto_udp": 0.00376,
+          "proto_icmp": 0.000549,
+          "proto_other": 0.00567,
+          "temporal_iat_mean": 0.120253,
+          "temporal_iat_cv": 0.023297,
+          "temporal_flow_rate_ewma": 0.009499,
+          "temporal_byte_rate_ewma": 0.017349,
+          "temporal_syn_rate_ewma": 0.00746,
+          "behavioral_dst_diversity": 0.0,
+          "behavioral_port_entropy": 0.0,
+          "behavioral_fanout_ratio": 0.0,
+          "behavioral_unanswered_ratio": 0.0,
+          "behavioral_src_activity_ewma": 0.244255
+        }
+      },
+      "Scanning": {
+        "sample_count": 9,
+        "is_statistically_generalizable": false,
+        "top_3_features": [
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.229917,
+            "rf_weight": 0.226738,
+            "mlp_weight": 0.237335
+          },
+          {
+            "feature": "flow_duration",
+            "combined_weight": 0.176358,
+            "rf_weight": 0.124788,
+            "mlp_weight": 0.296687
+          },
+          {
+            "feature": "mean_pkt_size",
+            "combined_weight": 0.12297,
+            "rf_weight": 0.155878,
+            "mlp_weight": 0.046187
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.176358,
+          "flow_bytes_per_sec": 0.048408,
+          "flow_pkts_per_sec": 0.116354,
+          "mean_pkt_size": 0.12297,
+          "payload_byte_ratio": 0.057686,
+          "pkt_count_ratio": 0.035769,
+          "tcp_syn_ratio": 0.015311,
+          "proto_tcp": 0.001641,
+          "proto_udp": 0.001037,
+          "proto_icmp": 0.000549,
+          "proto_other": 0.021737,
+          "temporal_iat_mean": 0.114772,
+          "temporal_iat_cv": 0.024368,
+          "temporal_flow_rate_ewma": 0.008893,
+          "temporal_byte_rate_ewma": 0.01676,
+          "temporal_syn_rate_ewma": 0.00747,
+          "behavioral_dst_diversity": 0.0,
+          "behavioral_port_entropy": 0.0,
+          "behavioral_fanout_ratio": 0.0,
+          "behavioral_unanswered_ratio": 0.0,
+          "behavioral_src_activity_ewma": 0.229917
+        }
+      },
+      "Attack": {
+        "sample_count": 3,
+        "is_statistically_generalizable": false,
+        "top_3_features": [
+          {
+            "feature": "flow_duration",
+            "combined_weight": 0.274823,
+            "rf_weight": 0.124788,
+            "mlp_weight": 0.624905
+          },
+          {
+            "feature": "behavioral_src_activity_ewma",
+            "combined_weight": 0.190999,
+            "rf_weight": 0.226738,
+            "mlp_weight": 0.10761
+          },
+          {
+            "feature": "flow_pkts_per_sec",
+            "combined_weight": 0.116354,
+            "rf_weight": 0.16622,
+            "mlp_weight": 1e-06
+          }
+        ],
+        "all_feature_attributions": {
+          "flow_duration": 0.274823,
+          "flow_bytes_per_sec": 0.048408,
+          "flow_pkts_per_sec": 0.116354,
+          "mean_pkt_size": 0.113051,
+          "payload_byte_ratio": 0.051587,
+          "pkt_count_ratio": 0.035769,
+          "tcp_syn_ratio": 0.006102,
+          "proto_tcp": 0.000938,
+          "proto_udp": 0.001037,
+          "proto_icmp": 0.000549,
+          "proto_other": 0.017251,
+          "temporal_iat_mean": 0.097372,
+          "temporal_iat_cv": 0.014336,
+          "temporal_flow_rate_ewma": 0.009606,
+          "temporal_byte_rate_ewma": 0.014356,
+          "temporal_syn_rate_ewma": 0.00746,
+          "behavioral_dst_diversity": 0.0,
+          "behavioral_port_entropy": 0.0,
+          "behavioral_fanout_ratio": 0.0,
+          "behavioral_unanswered_ratio": 0.0,
+          "behavioral_src_activity_ewma": 0.190999
+        }
+      }
+    }
+  },
+  "local_case_studies": [
+    {
+      "dataset": "NF-ToN-IoT-v2",
+      "attack_category": "Scanning",
+      "test_sample_index": 400,
+      "true_label": 1,
+      "option_c_probability": 0.977199,
+      "rf_probability": 0.99,
+      "robust_mlp_probability": 0.947329,
+      "selection_rule": "First correctly classified malicious flow (y=1) in primary category with Option C probability >= 0.95",
+      "top_5_influential_features": [
+        {
+          "feature": "mean_pkt_size",
+          "raw_value": 43.999978,
+          "combined_attribution": 0.141023,
+          "rf_attribution": 0.195622,
+          "mlp_attribution": 0.013625
+        },
+        {
+          "feature": "payload_byte_ratio",
+          "raw_value": 0.545455,
+          "combined_attribution": 0.115525,
+          "rf_attribution": 0.082253,
+          "mlp_attribution": 0.193158
+        },
+        {
+          "feature": "flow_bytes_per_sec",
+          "raw_value": 88000000.0,
+          "combined_attribution": 0.114571,
+          "rf_attribution": 0.162166,
+          "mlp_attribution": 0.003515
+        },
+        {
+          "feature": "behavioral_src_activity_ewma",
+          "raw_value": 0.3439,
+          "combined_attribution": 0.091268,
+          "rf_attribution": 0.023065,
+          "mlp_attribution": 0.250411
+        },
+        {
+          "feature": "temporal_iat_cv",
+          "raw_value": 3.368318,
+          "combined_attribution": 0.081515,
+          "rf_attribution": 0.023776,
+          "mlp_attribution": 0.216238
+        }
+      ],
+      "analyst_interpretation": "Flow classified as Scanning (P_OptionC = 0.9772). Primary threat attribution is driven by mean_pkt_size (0.141) and payload_byte_ratio (0.116), reflecting prominent temporal/behavioral anomalies characteristic of Scanning activity."
+    },
+    {
+      "dataset": "CICIoT2023",
+      "attack_category": "DDoS",
+      "test_sample_index": 0,
+      "true_label": 1,
+      "option_c_probability": 0.992095,
+      "rf_probability": 1.0,
+      "robust_mlp_probability": 0.973649,
+      "selection_rule": "First correctly classified malicious flow (y=1) in primary category with Option C probability >= 0.95",
+      "top_5_influential_features": [
+        {
+          "feature": "behavioral_src_activity_ewma",
+          "raw_value": 0.0,
+          "combined_attribution": 0.251814,
+          "rf_attribution": 0.226738,
+          "mlp_attribution": 0.310326
+        },
+        {
+          "feature": "mean_pkt_size",
+          "raw_value": 640.11104,
+          "combined_attribution": 0.156164,
+          "rf_attribution": 0.155878,
+          "mlp_attribution": 0.156833
+        },
+        {
+          "feature": "flow_pkts_per_sec",
+          "raw_value": 40.558412,
+          "combined_attribution": 0.116354,
+          "rf_attribution": 0.16622,
+          "mlp_attribution": 1e-06
+        },
+        {
+          "feature": "temporal_iat_mean",
+          "raw_value": 0.0,
+          "combined_attribution": 0.115725,
+          "rf_attribution": 0.107255,
+          "mlp_attribution": 0.135487
+        },
+        {
+          "feature": "payload_byte_ratio",
+          "raw_value": 0.834751,
+          "combined_attribution": 0.098728,
+          "rf_attribution": 0.039161,
+          "mlp_attribution": 0.23772
+        }
+      ],
+      "analyst_interpretation": "Flow classified as DDoS (P_OptionC = 0.9921). Primary threat attribution is driven by behavioral_src_activity_ewma (0.252) and mean_pkt_size (0.156), reflecting prominent temporal/behavioral anomalies characteristic of DDoS activity."
+    }
+  ]
+}

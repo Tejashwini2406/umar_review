@@ -1,0 +1,57 @@
+{
+  "version": "leakage-metadata-v1",
+  "role_definitions": {
+    "SAFE_FEATURE": "May be used directly as model input when compatible with the selected feature profile.",
+    "CONDITIONAL_FEATURE": "May be used only after documented normalization or profile-specific justification.",
+    "METADATA_ONLY": "Preserve for grouping, ordering, provenance, or feature generation; do not feed directly to models.",
+    "USED_FOR_GROUPING_FEATURE_GENERATION": "May be used to create causal temporal/behavioral features but excluded as direct input.",
+    "LABEL": "Ground-truth label or taxonomy column.",
+    "LEAKAGE_RISK": "Likely to encode source, identity, collection setup, label, or future information.",
+    "EXCLUDED": "Excluded from P1 feature matrices."
+  },
+  "datasets": {
+    "CICIDS2017": {
+      "Label": {"role": "LABEL", "reason": "Ground-truth class."},
+      "Destination Port": {"role": "CONDITIONAL_FEATURE", "reason": "Can be service semantics but may encode attack setup; allowed in in-domain, cautious in cross-domain."},
+      "Idle Mean": {"role": "SAFE_FEATURE", "reason": "Flow timing statistic, despite substring matching earlier leakage heuristic."},
+      "Idle Std": {"role": "SAFE_FEATURE", "reason": "Flow timing statistic."},
+      "Idle Max": {"role": "SAFE_FEATURE", "reason": "Flow timing statistic."},
+      "Idle Min": {"role": "SAFE_FEATURE", "reason": "Flow timing statistic."},
+      "Fwd Header Length.1": {"role": "EXCLUDED", "reason": "Duplicate CICFlowMeter column."}
+    },
+    "Edge-IIoTset": {
+      "Attack_label": {"role": "LABEL", "reason": "Binary target."},
+      "Attack_type": {"role": "LABEL", "reason": "Raw attack taxonomy."},
+      "frame.time": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Timestamp for ordering only; not direct input."},
+      "ip.src_host": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Entity key for behavior construction; direct use risks identity leakage."},
+      "ip.dst_host": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Entity key for behavior construction; direct use risks identity leakage."},
+      "http.file_data": {"role": "LEAKAGE_RISK", "reason": "Payload/content field can encode scenario artifacts."},
+      "http.request.full_uri": {"role": "LEAKAGE_RISK", "reason": "URI text can encode attack labels or collection artifacts."},
+      "http.request.uri.query": {"role": "LEAKAGE_RISK", "reason": "Query payload can directly contain attack strings."},
+      "mqtt.msg": {"role": "LEAKAGE_RISK", "reason": "Application payload-like message content."},
+      "tcp.seq": {"role": "METADATA_ONLY", "reason": "Connection sequence metadata, not semantic feature for cross-dataset generalization."}
+    },
+    "BoT-IoT": {
+      "attack": {"role": "LABEL", "reason": "Binary target."},
+      "category": {"role": "LABEL", "reason": "Raw attack family."},
+      "subcategory": {"role": "LABEL", "reason": "Raw attack subtype."},
+      "saddr": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Source entity for behavior construction; excluded as direct input."},
+      "daddr": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Destination entity for behavior construction; excluded as direct input."},
+      "stime": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Start time for causal temporal construction."},
+      "ltime": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "End time/order metadata."},
+      "pkSeqID": {"role": "LEAKAGE_RISK", "reason": "Row/sequence identifier."},
+      "smac": {"role": "LEAKAGE_RISK", "reason": "MAC/source identity artifact."},
+      "dmac": {"role": "LEAKAGE_RISK", "reason": "MAC/destination identity artifact."},
+      "soui": {"role": "LEAKAGE_RISK", "reason": "Vendor identity artifact."},
+      "doui": {"role": "LEAKAGE_RISK", "reason": "Vendor identity artifact."}
+    },
+    "N-BaIoT": {
+      "__filename_label__": {"role": "LABEL", "reason": "Ground truth derived from traffic filename."},
+      "device_id": {"role": "USED_FOR_GROUPING_FEATURE_GENERATION", "reason": "Device grouping/domain metadata, excluded as direct model input."},
+      "data_summary.csv": {"role": "METADATA_ONLY", "reason": "Dataset metadata file, not traffic."},
+      "device_info.csv": {"role": "METADATA_ONLY", "reason": "Dataset metadata file, not traffic."},
+      "features.csv": {"role": "METADATA_ONLY", "reason": "Feature documentation file, not traffic."}
+    }
+  }
+}
+

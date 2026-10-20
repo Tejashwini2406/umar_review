@@ -1,0 +1,8 @@
+RESULT,DATASET,MODEL,METRIC,VALUE,SOURCE,ARTIFACT,EXECUTION_COMMAND,STATUS,CAVEAT
+Detection,Edge-IIoTset,Standard MLP,AUC,0.8443,run_golden_pipeline.py,mlp_std.pt,python scripts/run_golden_pipeline.py,COMPUTATIONALLY-REPRODUCED,Uses raw RobustScaler
+Detection,Edge-IIoTset,Robust MLP,AUC,0.8001,run_golden_pipeline.py,mlp_rob.pt,python scripts/run_golden_pipeline.py,COMPUTATIONALLY-REPRODUCED,Uses raw RobustScaler
+Detection,Edge-IIoTset,Random Forest,AUC,0.9995,run_golden_pipeline.py,rf_model.joblib,python scripts/run_golden_pipeline.py,COMPUTATIONALLY-REPRODUCED,"max_depth=15, unweighted"
+Adversarial Eval,Edge-IIoTset,Option C,PGD-10 ASR,3.80%,run_golden_pipeline.py / 15_adaptive_ensemble_attack.py,golden_run_manifest.json,python scratch/run_evidence_challenge.py,COMPUTATIONALLY-REPRODUCED,Evaluated on frozen Option C
+Differential Privacy,Synthetic,Robust MLP,AUC vs Epsilon,Tradeoff Curve,run_privacy_experiments.py,privacy_evidence_summary.json,python scripts/run_privacy_experiments.py,SOURCE-VERIFIED,Demonstration uses synthetic Gaussian tensors only
+XAI,Edge-IIoTset,RF/MLP,Spearman Rho,Variable,12_run_shap_experiments.py,shap_results.json,python scripts/12_run_shap_experiments.py,SOURCE-VERIFIED,Calculates TreeSHAP/GradientExplainer independently
+Runtime Latency,ToN-IoT,Option C,ms/sample,1-5ms,benchmark_runtime_xai_privacy.py,runtime_overhead_summary.json,python scripts/benchmark_runtime_xai_privacy.py,SOURCE-VERIFIED,Offline .predict() inference only; no network stack

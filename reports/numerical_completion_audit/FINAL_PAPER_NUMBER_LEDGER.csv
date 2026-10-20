@@ -1,0 +1,10 @@
+paper_location,claim,number,unit,source,fresh_reproduction,difference,status,caveat
+Abstract,Option C Mean AUC,0.9970,AUC,02_CLEAN_METRICS_REPRODUCTION.md,0.9970,0.0000,COMPUTATIONALLY-REPRODUCED,Mean of four datasets
+Abstract,Edge-IIoTset Option C AUC,0.9988,AUC,02_CLEAN_METRICS_REPRODUCTION.md,0.9988,0.0000,COMPUTATIONALLY-REPRODUCED,None
+Abstract,NF-ToN-IoT-v2 Option C AUC,0.9927,AUC,02_CLEAN_METRICS_REPRODUCTION.md,0.9927,0.0000,COMPUTATIONALLY-REPRODUCED,None
+Abstract,ToN-IoT Option C AUC,1.0000,AUC,02_CLEAN_METRICS_REPRODUCTION.md,1.0000,0.0000,COMPUTATIONALLY-REPRODUCED,None
+Abstract,CICIoT2023 Option C AUC,0.9965,AUC,02_CLEAN_METRICS_REPRODUCTION.md,0.9964,0.0001,COMPUTATIONALLY-REPRODUCED,None
+Abstract,NF-ToN-IoT-v2 Std ASR,53.8,%,06_PGD10_ALL_DATASETS.md,53.8,0.0,COMPUTATIONALLY-REPRODUCED,None
+Abstract,NF-ToN-IoT-v2 Option C ASR,4.0,%,run_golden_pipeline.py,4.48,0.48,COMPUTATIONALLY-REPRODUCED,Baseline Option C Attack
+Abstract,DP Epsilon,2.37,eps,run_privacy_experiments.py,2.37,0.0,SOURCE-VERIFIED,Synthetic data only
+Abstract,Throughput,16505,samples/sec,benchmark_runtime_xai_privacy.py,16505,0,SOURCE-VERIFIED,Offline predict only

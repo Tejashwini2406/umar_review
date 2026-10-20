@@ -1,0 +1,291 @@
+{
+  "timestamp": "2026-09-14T12:56:28Z",
+  "seed": 42,
+  "datasets": [
+    "Edge-IIoTset",
+    "NF-ToN-IoT-v2",
+    "ToN-IoT",
+    "CICIoT2023"
+  ],
+  "feature_count": 21,
+  "results": {},
+  "detection_summary": {
+    "by_dataset": {
+      "Edge-IIoTset": {
+        "n_train": 4200,
+        "n_test": 1400,
+        "rf_roc_auc": 0.9994775,
+        "std_mlp_roc_auc": 0.8443274999999998,
+        "robust_mlp_roc_auc": 0.8001774999999999,
+        "option_c_roc_auc": 0.9987524999999999
+      },
+      "NF-ToN-IoT-v2": {
+        "n_train": 4200,
+        "n_test": 1400,
+        "rf_roc_auc": 0.9939962499999999,
+        "std_mlp_roc_auc": 0.8397912500000001,
+        "robust_mlp_roc_auc": 0.8299249999999999,
+        "option_c_roc_auc": 0.99267125
+      },
+      "ToN-IoT": {
+        "n_train": 4200,
+        "n_test": 1400,
+        "rf_roc_auc": 1.0,
+        "std_mlp_roc_auc": 0.7745099999999999,
+        "robust_mlp_roc_auc": 0.8062900000000001,
+        "option_c_roc_auc": 1.0
+      },
+      "CICIoT2023": {
+        "n_train": 4200,
+        "n_test": 1400,
+        "rf_roc_auc": 0.9968,
+        "std_mlp_roc_auc": 0.9775699999999999,
+        "robust_mlp_roc_auc": 0.9884425,
+        "option_c_roc_auc": 0.9965025
+      }
+    },
+    "aggregate": {
+      "RF": {
+        "mean_roc_auc": 0.9975684374999999,
+        "variance": 5.727008886718913e-06
+      },
+      "Standard_MLP": {
+        "mean_roc_auc": 0.8590496875,
+        "variance": 0.005445413364355469
+      },
+      "Robust_MLP": {
+        "mean_roc_auc": 0.85620875,
+        "variance": 0.005951995682812503
+      },
+      "Option_C": {
+        "mean_roc_auc": 0.9969815625,
+        "variance": 7.763869824218688e-06
+      }
+    }
+  },
+  "adversarial_summary": {
+    "Edge-IIoTset": {
+      "std_mlp_pgd10_asr": 0.0,
+      "robust_mlp_pgd10_asr": 0.0,
+      "option_c_pgd10_asr": 0.038
+    },
+    "NF-ToN-IoT-v2": {
+      "std_mlp_pgd10_asr": 0.538,
+      "robust_mlp_pgd10_asr": 0.48,
+      "option_c_pgd10_asr": 0.04
+    },
+    "ToN-IoT": {
+      "std_mlp_pgd10_asr": 0.023,
+      "robust_mlp_pgd10_asr": 0.025,
+      "option_c_pgd10_asr": 0.0
+    },
+    "CICIoT2023": {
+      "std_mlp_pgd10_asr": 0.023,
+      "robust_mlp_pgd10_asr": 0.013,
+      "option_c_pgd10_asr": 0.012
+    }
+  },
+  "total_duration_seconds": 1663.8907396793365,
+  "privacy_summary": {
+    "data_minimization": {
+      "is_compliant": true,
+      "total_features": 21,
+      "allowed_categories": 21,
+      "violations_found": [],
+      "policy_summary": "Operates strictly on 21 flow-level statistical metrics without raw payload storage."
+    },
+    "dp_experiments": {
+      "Edge-IIoTset": [
+        {
+          "noise_multiplier": 0.0,
+          "epsilon": Infinity,
+          "delta": 1e-05,
+          "roc_auc": 0.9537775000000001,
+          "pgd10_asr": 0.665,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 0.5,
+          "epsilon": 15.849635208456444,
+          "delta": 1e-05,
+          "roc_auc": 0.9734324999999999,
+          "pgd10_asr": 0.689,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 1.0,
+          "epsilon": 2.372113915922521,
+          "delta": 1e-05,
+          "roc_auc": 0.9768887499999999,
+          "pgd10_asr": 0.701,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 2.0,
+          "epsilon": 0.8014591254486179,
+          "delta": 1e-05,
+          "roc_auc": 0.97806,
+          "pgd10_asr": 0.715,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        }
+      ],
+      "NF-ToN-IoT-v2": [
+        {
+          "noise_multiplier": 0.0,
+          "epsilon": Infinity,
+          "delta": 1e-05,
+          "roc_auc": 0.9763337499999999,
+          "pgd10_asr": 0.015,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 0.5,
+          "epsilon": 15.849635208456444,
+          "delta": 1e-05,
+          "roc_auc": 0.8864650000000001,
+          "pgd10_asr": 0.025,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 1.0,
+          "epsilon": 2.372113915922521,
+          "delta": 1e-05,
+          "roc_auc": 0.85406,
+          "pgd10_asr": 0.477,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 2.0,
+          "epsilon": 0.8014591254486179,
+          "delta": 1e-05,
+          "roc_auc": 0.8284174999999999,
+          "pgd10_asr": 0.478,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        }
+      ],
+      "ToN-IoT": [
+        {
+          "noise_multiplier": 0.0,
+          "epsilon": Infinity,
+          "delta": 1e-05,
+          "roc_auc": 0.9999975,
+          "pgd10_asr": 0.001,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238,
+          "batch_stats": {
+            "mean_batch_size": 63.86363636363637,
+            "min_batch_size": 40,
+            "max_batch_size": 92,
+            "std_batch_size": 8.052453726615493
+          }
+        },
+        {
+          "noise_multiplier": 0.5,
+          "epsilon": 15.849635208456444,
+          "delta": 1e-05,
+          "roc_auc": 0.9978425,
+          "pgd10_asr": 0.001,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238,
+          "batch_stats": {
+            "mean_batch_size": 63.86363636363637,
+            "min_batch_size": 40,
+            "max_batch_size": 92,
+            "std_batch_size": 8.052453726615493
+          }
+        },
+        {
+          "noise_multiplier": 1.0,
+          "epsilon": 2.372113915922521,
+          "delta": 1e-05,
+          "roc_auc": 0.99671,
+          "pgd10_asr": 0.001,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238,
+          "batch_stats": {
+            "mean_batch_size": 63.86363636363637,
+            "min_batch_size": 40,
+            "max_batch_size": 92,
+            "std_batch_size": 8.052453726615493
+          }
+        },
+        {
+          "noise_multiplier": 2.0,
+          "epsilon": 0.8014591254486179,
+          "delta": 1e-05,
+          "roc_auc": 0.9967775,
+          "pgd10_asr": 0.001,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238,
+          "batch_stats": {
+            "mean_batch_size": 63.86363636363637,
+            "min_batch_size": 40,
+            "max_batch_size": 92,
+            "std_batch_size": 8.052453726615493
+          }
+        }
+      ],
+      "CICIoT2023": [
+        {
+          "noise_multiplier": 0.0,
+          "epsilon": Infinity,
+          "delta": 1e-05,
+          "roc_auc": 0.96453375,
+          "pgd10_asr": 0.044,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 0.5,
+          "epsilon": 15.849635208456444,
+          "delta": 1e-05,
+          "roc_auc": 0.960295,
+          "pgd10_asr": 0.062,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 1.0,
+          "epsilon": 2.372113915922521,
+          "delta": 1e-05,
+          "roc_auc": 0.9639837499999998,
+          "pgd10_asr": 0.058,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        },
+        {
+          "noise_multiplier": 2.0,
+          "epsilon": 0.8014591254486179,
+          "delta": 1e-05,
+          "roc_auc": 0.9673325,
+          "pgd10_asr": 0.059,
+          "actual_steps": 660,
+          "sampling_rate": 0.015238095238095238
+        }
+      ]
+    },
+    "methodology": "Joint DP-SGD + PGD-7 Adversarial Training on Neural Stream",
+    "provenance": "100% Real Benchmark Data (No Synthetic Fallbacks)",
+    "privacy_guarantee_scope": "DP-trained Neural Stream Branch Only (Not RF or Full Option C Ensemble)",
+    "ensemble_aware_attack_asr": {
+      "Edge-IIoTset": 0.46,
+      "NF-ToN-IoT-v2": 0.02,
+      "ToN-IoT": 0.0,
+      "CICIoT2023": 0.02
+    }
+  },
+  "ensemble_aware_attack_asr": {
+    "Edge-IIoTset": 0.46,
+    "NF-ToN-IoT-v2": 0.02,
+    "ToN-IoT": 0.0,
+    "CICIoT2023": 0.02
+  }
+}

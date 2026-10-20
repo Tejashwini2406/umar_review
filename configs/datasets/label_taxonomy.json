@@ -1,0 +1,75 @@
+{
+  "version": "label-taxonomy-v1",
+  "primary_task": "binary_cross_dataset",
+  "binary_labels": ["BENIGN", "ATTACK"],
+  "datasets": {
+    "CICIDS2017": {
+      "label_column": "Label",
+      "benign_values": ["BENIGN"],
+      "attack_values_observed": [
+        "DDoS",
+        "PortScan",
+        "Bot",
+        "Infiltration",
+        "Web Attack \ufffd Brute Force",
+        "Web Attack \ufffd XSS",
+        "Web Attack \ufffd Sql Injection",
+        "FTP-Patator",
+        "SSH-Patator",
+        "DoS Hulk",
+        "DoS GoldenEye",
+        "DoS slowloris",
+        "DoS Slowhttptest",
+        "Heartbleed"
+      ]
+    },
+    "Edge-IIoTset": {
+      "binary_label_column": "Attack_label",
+      "raw_attack_column": "Attack_type",
+      "benign_values": ["0", "Normal"],
+      "attack_values_observed": [
+        "DDoS_UDP",
+        "DDoS_ICMP",
+        "Ransomware",
+        "DDoS_HTTP",
+        "SQL_injection",
+        "Uploading",
+        "DDoS_TCP",
+        "Backdoor",
+        "Vulnerability_scanner",
+        "Port_Scanning",
+        "XSS",
+        "Password",
+        "MITM",
+        "Fingerprinting"
+      ]
+    },
+    "BoT-IoT": {
+      "binary_label_column": "attack",
+      "raw_attack_columns": ["category", "subcategory"],
+      "benign_values": ["0", "Normal"],
+      "attack_values_observed": ["Reconnaissance", "DoS", "Theft", "DDoS"]
+    },
+    "N-BaIoT": {
+      "label_source": "filename",
+      "benign_values": ["*.benign.csv"],
+      "attack_values_observed": [
+        "gafgyt.combo",
+        "gafgyt.junk",
+        "gafgyt.scan",
+        "gafgyt.tcp",
+        "gafgyt.udp",
+        "mirai.ack",
+        "mirai.scan",
+        "mirai.syn",
+        "mirai.udp",
+        "mirai.udpplain"
+      ]
+    }
+  },
+  "multiclass_position": {
+    "status": "dataset_specific_only_for_now",
+    "rationale": "Observed attack families differ substantially across datasets. A forced four-dataset multiclass taxonomy would collapse incompatible semantics and hide domain shift. Binary BENIGN/ATTACK is the scientifically defensible primary cross-dataset task."
+  }
+}
+

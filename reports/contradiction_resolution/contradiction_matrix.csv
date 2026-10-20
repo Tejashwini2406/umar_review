@@ -1,0 +1,10 @@
+ISSUE,HISTORICAL_STATE,FRESH_STATE,SOURCE_EVIDENCE,ROOT_CAUSE,STATUS,CONFIDENCE,REPRODUCED?,ACTION_REQUIRED
+MLP Discrepancy,Edge AUC=0.8443,Edge AUC=0.9753,run_golden_pipeline.py:171,"Historical used raw RobustScaler, Fresh used StandardScaler",RESOLVED,100%,YES,None
+RF Config,"max_depth=15, unweighted","max_depth=20, balanced",run_golden_pipeline.py:181,Pipeline used frozen max_depth=15; isolated script drifted to 20,RESOLVED,100%,YES,None
+Scaling,RobustScaler,StandardScaler,pipeline.py vs run_golden_pipeline.py,Fresh audit hallucinated StandardScaler; Golden pipeline used raw RobustScaler,RESOLVED,100%,YES,None
+Dataset Construction,7000 samples,7000 samples,03_materialize_and_audit_features.py,Hardcoded chronological truncation of stream to reach exact sample limits,RESOLVED,100%,YES,Acknowledge dataset limit
+PGD Steps,PGD-10 (Eval),PGD-7 (Train),run_golden_pipeline.py / adversarial_training.py,"Code intentionally uses 7 for training speed, 10 for evaluation rigor",RESOLVED,100%,YES,None
+Adaptive Attack Target,Ensemble via Surrogate,Direct MLP (FGSM proxy),15_adaptive_ensemble_attack.py,Original uses rigorous differentiable surrogate; fresh audit mistakenly ran basic FGSM,RESOLVED,100%,YES,None
+DP Synthetic Data,Gaussian Synth Tensors,Gaussian Synth Tensors,run_privacy_experiments.py:84,Script literally generates rng.normal tensors instead of using parquet datasets,RESOLVED,100%,YES,Acknowledge synthetic demo
+XAI Attribution,Separate Tree/Gradient,Linear Blend,12_run_shap_experiments.py,Original code computes independently and correlates. Fresh audit hallucinated 0.7/0.3 blend.,RESOLVED,100%,YES,None
+Runtime Scope,Offline .predict() only,Offline .predict() only,benchmark_runtime_xai_privacy.py,"Code isolates purely ML inference, ignoring packet processing/state management",RESOLVED,100%,YES,Acknowledge offline scope

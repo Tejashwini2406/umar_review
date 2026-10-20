@@ -1,0 +1,30 @@
+{
+  "version": 3,
+  "target_false_positive_rate": 0.01,
+  "history_size": 10,
+  "use_stream_history": false,
+  "threshold": 1.0064791156617683,
+  "signal_calibration": {
+    "model_disagreement": {
+      "center": 0.5919059687644359,
+      "lower_scale": 0.5858160079085406,
+      "upper_scale": 0.28632075904308596
+    },
+    "confidence_drift": {
+      "center": 0.0,
+      "lower_scale": 0.001,
+      "upper_scale": 0.001
+    },
+    "prediction_instability": {
+      "center": 0.0,
+      "lower_scale": 0.001,
+      "upper_scale": 0.001
+    },
+    "autoencoder_error": {
+      "center": 0.10203643143177032,
+      "lower_scale": 0.06098380809649825,
+      "upper_scale": 500.21757416427135
+    }
+  },
+  "calibration_false_positive_rate": 0.00909090909090909
+}

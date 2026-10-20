@@ -1,0 +1,83 @@
+{
+  "dataset": "Edge-IIoTset",
+  "evaluation_status": "exploratory_checkpoint_specific",
+  "experiment": "score_query_spsa_against_actual_option_c",
+  "timestamp_utc": "2026-10-19T15:21:45.304729+00:00",
+  "split_strategy": "seeded_stratified_random",
+  "provenance": {
+    "split_manifest_sha256": "7e25488d460aad9e13aab1293f47a8e2df071c1a22697c18ea4432e958d61047",
+    "test_split_sha256": "fd572a4e4a599499a0e4d8f9d258562123c53ea24b98f748f027c82f1904f419",
+    "training_artifact_sha256": {
+      "prep_standardized.joblib": "7966f8d8a943682fbfa4a54d83c09ca1c860f7101bc373b2524892c6e48373dc",
+      "rf_model.joblib": "a3ff5417aa5d52c10e0efb1d42962fa30ab4100f6102cc7baf7459cf12a1684b",
+      "mlp_adversarial.pt": "699471c750ae60b1820424e88d5dc2692704d2aa11eb309340ceb82b9987188b",
+      "ae_model.pt": "fd1469c455038340d59b31dfdf70cc3389b612ab877e28624131d3be8697a3f1"
+    }
+  },
+  "threat_model": {
+    "access": "score-query access to the deployed Option C probability",
+    "target": "0.7 * actual RF probability + 0.3 * actual robust-MLP probability",
+    "budget_space": "RobustScaler model-input coordinates",
+    "epsilon_linf": 0.1,
+    "mutable_features": [
+      "flow_duration",
+      "flow_bytes_per_sec",
+      "flow_pkts_per_sec",
+      "mean_pkt_size",
+      "payload_byte_ratio",
+      "pkt_count_ratio",
+      "tcp_syn_ratio",
+      "temporal_iat_mean",
+      "temporal_iat_cv",
+      "temporal_flow_rate_ewma",
+      "temporal_byte_rate_ewma",
+      "temporal_syn_rate_ewma",
+      "behavioral_dst_diversity",
+      "behavioral_port_entropy",
+      "behavioral_fanout_ratio",
+      "behavioral_unanswered_ratio",
+      "behavioral_src_activity_ewma"
+    ],
+    "frozen_features": [
+      "proto_icmp",
+      "proto_other",
+      "proto_tcp",
+      "proto_udp"
+    ],
+    "physical_realizability": "Not established; independent feature perturbations in scaled space may not correspond to valid network flows.",
+    "bcl_scope": "The BCL is advisory and does not change Option C's ATTACK/BENIGN decision. Its alert path is not optimized by this per-flow attack."
+  },
+  "attack": {
+    "method": "SPSA finite-difference sign updates against actual Option C scores",
+    "seed": 42,
+    "steps": 40,
+    "alpha": 0.025,
+    "probe_scale": 0.01,
+    "optimization_queries_per_sample": 80,
+    "optimization_query_inputs": 10240,
+    "clean_test_score_query_inputs": 2000,
+    "adversarial_evaluation_query_inputs": 128,
+    "total_score_query_inputs": 12368
+  },
+  "evaluation": {
+    "test_rows": 2000,
+    "correctly_detected_test_attacks": 1700,
+    "attacks_selected_for_query_attack": 128,
+    "successful_evasions": 0,
+    "attack_success_rate": 0.0,
+    "attack_success_rate_95ci_wilson": [
+      0.0,
+      0.029136956273508416
+    ],
+    "attack_success_rate_denominator": "selected test attacks correctly detected by the clean Option C model",
+    "clean_probability_mean": 0.9270643343813716,
+    "adversarial_probability_mean": 0.8861033973470329,
+    "decision_threshold": 0.5
+  },
+  "limitations": [
+    "Results describe one frozen checkpoint, not the distribution across training seeds.",
+    "This test-set attack evaluation is exploratory and does not support a universal robustness claim.",
+    "Feature-space perturbations have not been checked for physical/network validity."
+  ],
+  "result_file": "D:\\BMSIT\\Major Project\\P1_task\\reports\\adversarial\\Edge-IIoTset_black_box_attack.json"
+}

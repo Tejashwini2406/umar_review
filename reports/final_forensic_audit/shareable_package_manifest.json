@@ -1,0 +1,276 @@
+{
+  "zip_name": "P1_Task_Implementation_Shareable_Codebase.zip",
+  "zip_path": "c:\\Users\\umari\\Documents\\P1_task_Implementation\\P1_Task_Implementation_Shareable_Codebase.zip",
+  "zip_size_mb": 4.57,
+  "zip_size_bytes": 4794918,
+  "total_included_files": 417,
+  "included_categories": {
+    "Root Files": 10,
+    "configs": 5,
+    "demo": 2,
+    "final_ieee_paper": 6,
+    "models": 70,
+    "paper_reference": 4,
+    "project_context": 4,
+    "references": 1,
+    "reports": 14,
+    "scratch": 94,
+    "scripts": 80,
+    "src": 86,
+    "tests": 41
+  },
+  "total_excluded_files": 149,
+  "important_excluded_files_count": 147,
+  "important_excluded_files": [
+    {
+      "path": "models\\cross_domain\\random_forest\\CICIDS2017_rf.joblib",
+      "size": 42778249,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\random_forest\\CICIDS2017_rf.joblib",
+      "size": 42778249,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\random_forest\\CICIDS2017_rf.joblib",
+      "size": 30033929,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\random_forest\\CICIDS2017_rf.joblib",
+      "size": 29675209,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\random_forest\\CICIDS2017_rf.joblib",
+      "size": 29675209,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\random_forest\\N-BaIoT_rf.joblib",
+      "size": 20678505,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\random_forest\\N-BaIoT_rf.joblib",
+      "size": 20678505,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\random_forest\\N-BaIoT_rf.joblib",
+      "size": 20678505,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\cross_domain\\random_forest\\BoT-IoT_rf.joblib",
+      "size": 19420985,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\random_forest\\BoT-IoT_rf.joblib",
+      "size": 19420985,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\random_forest\\BoT-IoT_rf.joblib",
+      "size": 18726105,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\random_forest\\BoT-IoT_rf.joblib",
+      "size": 18628665,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\random_forest\\BoT-IoT_rf.joblib",
+      "size": 18415385,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\cross_domain\\random_forest\\Edge-IIoTset_rf.joblib",
+      "size": 12938089,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\random_forest\\Edge-IIoTset_rf.joblib",
+      "size": 12938089,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\final\\ToN-IoT\\rf_model.joblib",
+      "size": 11505913,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\verification_retrain\\ToN-IoT\\rf_model.joblib",
+      "size": 11505913,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\cross_domain\\random_forest\\N-BaIoT_rf.joblib",
+      "size": 3447241,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\random_forest\\N-BaIoT_rf.joblib",
+      "size": 3447241,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\NF-ToN-IoT-v2\\rf_model.joblib",
+      "size": 2140937,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\standardized\\NF-ToN-IoT-v2\\rf_model.joblib",
+      "size": 2097097,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\final\\Edge-IIoTset\\rf_model.joblib",
+      "size": 1749753,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\verification_retrain\\Edge-IIoTset\\rf_model.joblib",
+      "size": 1749753,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\random_forest\\Edge-IIoTset_rf.joblib",
+      "size": 1619433,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\random_forest\\Edge-IIoTset_rf.joblib",
+      "size": 1529497,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\standardized\\CICIoT2023\\rf_model.joblib",
+      "size": 926697,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\CICIoT2023\\rf_model.joblib",
+      "size": 920937,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\random_forest\\Edge-IIoTset_rf.joblib",
+      "size": 557001,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\autoencoder\\N-BaIoT_ae.joblib",
+      "size": 282844,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\Edge-IIoTset\\rf_model.joblib",
+      "size": 234057,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\standardized\\Edge-IIoTset\\rf_model.joblib",
+      "size": 234057,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\final\\deployable_artifact\\model.joblib",
+      "size": 209913,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\ToN-IoT\\rf_model.joblib",
+      "size": 209897,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\standardized\\ToN-IoT\\rf_model.joblib",
+      "size": 209897,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\autoencoder\\N-BaIoT_ae.joblib",
+      "size": 145584,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\cross_domain\\autoencoder\\N-BaIoT_ae.joblib",
+      "size": 145584,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\autoencoder\\N-BaIoT_ae.joblib",
+      "size": 145584,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\autoencoder\\N-BaIoT_ae.joblib",
+      "size": 145584,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\autoencoder\\BoT-IoT_ae.joblib",
+      "size": 121487,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\cross_domain\\neural_network\\N-BaIoT_mlp.pt",
+      "size": 95877,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\neural_network\\N-BaIoT_mlp.pt",
+      "size": 95877,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\neural_network\\N-BaIoT_mlp.pt",
+      "size": 95877,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\neural_network\\N-BaIoT_mlp.pt",
+      "size": 95877,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\neural_network\\N-BaIoT_mlp.pt",
+      "size": 95877,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v3\\autoencoder\\CICIDS2017_ae.joblib",
+      "size": 81188,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\v2\\in_domain\\autoencoder\\BoT-IoT_ae.joblib",
+      "size": 65163,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\in_domain\\autoencoder\\BoT-IoT_ae.joblib",
+      "size": 63075,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\CICIoT2023\\mlp_adversarial.pt",
+      "size": 62317,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\Edge-IIoTset\\mlp_adversarial.pt",
+      "size": 62317,
+      "category": "Model Checkpoint"
+    },
+    {
+      "path": "models\\golden_run\\NF-ToN-IoT-v2\\mlp_adversarial.pt",
+      "size": 62317,
+      "category": "Model Checkpoint"
+    }
+  ]
+}

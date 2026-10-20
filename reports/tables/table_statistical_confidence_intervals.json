@@ -1,0 +1,384 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T21:10:00Z",
+    "git_commit": "c8ffa15f03e61fe601994bf53396b8614d9d3596",
+    "seed": 42,
+    "bootstrap_replicates": 1000,
+    "confidence_level": 0.95,
+    "bootstrap_method": "Non-parametric percentile bootstrap with stratified class validity check",
+    "datasets": [
+      "Edge-IIoTset",
+      "NF-ToN-IoT-v2",
+      "ToN-IoT",
+      "CICIoT2023"
+    ],
+    "classification_threshold": 0.5,
+    "interpretation_note": "Uncertainty intervals quantify sampling variation on test split; overlapping CIs do not constitute a formal hypothesis test."
+  },
+  "by_dataset": {
+    "Edge-IIoTset": {
+      "total_test_samples": 1400,
+      "attackable_malicious_samples": 1000,
+      "clean_metrics": {
+        "RF": {
+          "roc_auc": {
+            "point_estimate": 0.999478,
+            "lower_bound_95": 0.998849,
+            "upper_bound_95": 0.999922,
+            "ci_string": "0.9995 [0.9988, 0.9999]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.901358,
+            "lower_bound_95": 0.883262,
+            "upper_bound_95": 0.91791,
+            "ci_string": "0.9014 [0.8833, 0.9179]"
+          }
+        },
+        "Standard_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.844327,
+            "lower_bound_95": 0.816806,
+            "upper_bound_95": 0.870688,
+            "ci_string": "0.8443 [0.8168, 0.8707]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.416667,
+            "lower_bound_95": 0.408778,
+            "upper_bound_95": 0.424579,
+            "ci_string": "0.4167 [0.4088, 0.4246]"
+          }
+        },
+        "Robust_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.800177,
+            "lower_bound_95": 0.772248,
+            "upper_bound_95": 0.828385,
+            "ci_string": "0.8002 [0.7722, 0.8284]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.416667,
+            "lower_bound_95": 0.409283,
+            "upper_bound_95": 0.424579,
+            "ci_string": "0.4167 [0.4093, 0.4246]"
+          }
+        },
+        "Option_C": {
+          "roc_auc": {
+            "point_estimate": 0.998752,
+            "lower_bound_95": 0.996849,
+            "upper_bound_95": 0.99992,
+            "ci_string": "0.9988 [0.9968, 0.9999]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.975118,
+            "lower_bound_95": 0.96565,
+            "upper_bound_95": 0.983558,
+            "ci_string": "0.9751 [0.9657, 0.9836]"
+          }
+        }
+      },
+      "adversarial_metrics": {
+        "Standard_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.0,
+            "lower_bound_95": 0.0,
+            "upper_bound_95": 0.0,
+            "ci_string": "0.0000 [0.0000, 0.0000]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Robust_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.0,
+            "lower_bound_95": 0.0,
+            "upper_bound_95": 0.0,
+            "ci_string": "0.0000 [0.0000, 0.0000]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Option_C": {
+          "pgd10_asr": {
+            "point_estimate": 0.038,
+            "lower_bound_95": 0.026,
+            "upper_bound_95": 0.051,
+            "ci_string": "0.0380 [0.0260, 0.0510]"
+          },
+          "attackable_sample_count": 1000
+        }
+      }
+    },
+    "NF-ToN-IoT-v2": {
+      "total_test_samples": 1400,
+      "attackable_malicious_samples": 1000,
+      "clean_metrics": {
+        "RF": {
+          "roc_auc": {
+            "point_estimate": 0.993996,
+            "lower_bound_95": 0.989565,
+            "upper_bound_95": 0.997816,
+            "ci_string": "0.9940 [0.9896, 0.9978]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.990324,
+            "lower_bound_95": 0.984248,
+            "upper_bound_95": 0.995641,
+            "ci_string": "0.9903 [0.9842, 0.9956]"
+          }
+        },
+        "Standard_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.839791,
+            "lower_bound_95": 0.814386,
+            "upper_bound_95": 0.863018,
+            "ci_string": "0.8398 [0.8144, 0.8630]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.591672,
+            "lower_bound_95": 0.565264,
+            "upper_bound_95": 0.615169,
+            "ci_string": "0.5917 [0.5653, 0.6152]"
+          }
+        },
+        "Robust_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.829925,
+            "lower_bound_95": 0.801817,
+            "upper_bound_95": 0.85478,
+            "ci_string": "0.8299 [0.8018, 0.8548]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.57903,
+            "lower_bound_95": 0.551521,
+            "upper_bound_95": 0.603903,
+            "ci_string": "0.5790 [0.5515, 0.6039]"
+          }
+        },
+        "Option_C": {
+          "roc_auc": {
+            "point_estimate": 0.992671,
+            "lower_bound_95": 0.985312,
+            "upper_bound_95": 0.998139,
+            "ci_string": "0.9927 [0.9853, 0.9981]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.928471,
+            "lower_bound_95": 0.913359,
+            "upper_bound_95": 0.942717,
+            "ci_string": "0.9285 [0.9134, 0.9427]"
+          }
+        }
+      },
+      "adversarial_metrics": {
+        "Standard_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.538,
+            "lower_bound_95": 0.508,
+            "upper_bound_95": 0.57,
+            "ci_string": "0.5380 [0.5080, 0.5700]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Robust_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.48,
+            "lower_bound_95": 0.449,
+            "upper_bound_95": 0.513,
+            "ci_string": "0.4800 [0.4490, 0.5130]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Option_C": {
+          "pgd10_asr": {
+            "point_estimate": 0.04,
+            "lower_bound_95": 0.029,
+            "upper_bound_95": 0.052,
+            "ci_string": "0.0400 [0.0290, 0.0520]"
+          },
+          "attackable_sample_count": 1000
+        }
+      }
+    },
+    "ToN-IoT": {
+      "total_test_samples": 1400,
+      "attackable_malicious_samples": 1000,
+      "clean_metrics": {
+        "RF": {
+          "roc_auc": {
+            "point_estimate": 1.0,
+            "lower_bound_95": 1.0,
+            "upper_bound_95": 1.0,
+            "ci_string": "1.0000 [1.0000, 1.0000]"
+          },
+          "macro_f1": {
+            "point_estimate": 1.0,
+            "lower_bound_95": 1.0,
+            "upper_bound_95": 1.0,
+            "ci_string": "1.0000 [1.0000, 1.0000]"
+          }
+        },
+        "Standard_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.77451,
+            "lower_bound_95": 0.748317,
+            "upper_bound_95": 0.800416,
+            "ci_string": "0.7745 [0.7483, 0.8004]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.543891,
+            "lower_bound_95": 0.515708,
+            "upper_bound_95": 0.574118,
+            "ci_string": "0.5439 [0.5157, 0.5741]"
+          }
+        },
+        "Robust_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.80629,
+            "lower_bound_95": 0.780586,
+            "upper_bound_95": 0.830994,
+            "ci_string": "0.8063 [0.7806, 0.8310]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.550811,
+            "lower_bound_95": 0.522508,
+            "upper_bound_95": 0.581591,
+            "ci_string": "0.5508 [0.5225, 0.5816]"
+          }
+        },
+        "Option_C": {
+          "roc_auc": {
+            "point_estimate": 1.0,
+            "lower_bound_95": 1.0,
+            "upper_bound_95": 1.0,
+            "ci_string": "1.0000 [1.0000, 1.0000]"
+          },
+          "macro_f1": {
+            "point_estimate": 1.0,
+            "lower_bound_95": 1.0,
+            "upper_bound_95": 1.0,
+            "ci_string": "1.0000 [1.0000, 1.0000]"
+          }
+        }
+      },
+      "adversarial_metrics": {
+        "Standard_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.023,
+            "lower_bound_95": 0.014,
+            "upper_bound_95": 0.033,
+            "ci_string": "0.0230 [0.0140, 0.0330]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Robust_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.025,
+            "lower_bound_95": 0.016,
+            "upper_bound_95": 0.035,
+            "ci_string": "0.0250 [0.0160, 0.0350]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Option_C": {
+          "pgd10_asr": {
+            "point_estimate": 0.0,
+            "lower_bound_95": 0.0,
+            "upper_bound_95": 0.0,
+            "ci_string": "0.0000 [0.0000, 0.0000]"
+          },
+          "attackable_sample_count": 1000
+        }
+      }
+    },
+    "CICIoT2023": {
+      "total_test_samples": 1400,
+      "attackable_malicious_samples": 1000,
+      "clean_metrics": {
+        "RF": {
+          "roc_auc": {
+            "point_estimate": 0.9968,
+            "lower_bound_95": 0.994608,
+            "upper_bound_95": 0.998649,
+            "ci_string": "0.9968 [0.9946, 0.9986]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.937657,
+            "lower_bound_95": 0.923554,
+            "upper_bound_95": 0.952435,
+            "ci_string": "0.9377 [0.9236, 0.9524]"
+          }
+        },
+        "Standard_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.97757,
+            "lower_bound_95": 0.971333,
+            "upper_bound_95": 0.983329,
+            "ci_string": "0.9776 [0.9713, 0.9833]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.888654,
+            "lower_bound_95": 0.86994,
+            "upper_bound_95": 0.905812,
+            "ci_string": "0.8887 [0.8699, 0.9058]"
+          }
+        },
+        "Robust_MLP": {
+          "roc_auc": {
+            "point_estimate": 0.988443,
+            "lower_bound_95": 0.984132,
+            "upper_bound_95": 0.992051,
+            "ci_string": "0.9884 [0.9841, 0.9921]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.919751,
+            "lower_bound_95": 0.902312,
+            "upper_bound_95": 0.934459,
+            "ci_string": "0.9198 [0.9023, 0.9345]"
+          }
+        },
+        "Option_C": {
+          "roc_auc": {
+            "point_estimate": 0.996502,
+            "lower_bound_95": 0.99426,
+            "upper_bound_95": 0.998296,
+            "ci_string": "0.9965 [0.9943, 0.9983]"
+          },
+          "macro_f1": {
+            "point_estimate": 0.929222,
+            "lower_bound_95": 0.912061,
+            "upper_bound_95": 0.943355,
+            "ci_string": "0.9292 [0.9121, 0.9434]"
+          }
+        }
+      },
+      "adversarial_metrics": {
+        "Standard_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.023,
+            "lower_bound_95": 0.014,
+            "upper_bound_95": 0.032,
+            "ci_string": "0.0230 [0.0140, 0.0320]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Robust_MLP": {
+          "pgd10_asr": {
+            "point_estimate": 0.013,
+            "lower_bound_95": 0.006,
+            "upper_bound_95": 0.021,
+            "ci_string": "0.0130 [0.0060, 0.0210]"
+          },
+          "attackable_sample_count": 1000
+        },
+        "Option_C": {
+          "pgd10_asr": {
+            "point_estimate": 0.012,
+            "lower_bound_95": 0.006,
+            "upper_bound_95": 0.019,
+            "ci_string": "0.0120 [0.0060, 0.0190]"
+          },
+          "attackable_sample_count": 1000
+        }
+      }
+    }
+  }
+}

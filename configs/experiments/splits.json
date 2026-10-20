@@ -1,0 +1,31 @@
+{
+  "version": "split-strategy-v1",
+  "default_random_state": 42,
+  "datasets": {
+    "CICIDS2017": {
+      "strategy": "source-file/day-aware holdout",
+      "grouping_key": "source_file",
+      "temporal_key": null,
+      "rationale": "Daily MachineLearningCSV files represent collection windows and attack campaigns; keep file/day boundaries available for leakage-aware validation."
+    },
+    "Edge-IIoTset": {
+      "strategy": "time/source-aware when frame.time is valid",
+      "grouping_key": "source_file",
+      "temporal_key": "frame.time",
+      "rationale": "Prepared ML CSV is selected for tabular P1; frame.time/ip fields are metadata for ordering and behavior generation, not direct predictors."
+    },
+    "BoT-IoT": {
+      "strategy": "partition/time-aware",
+      "grouping_key": "source_file",
+      "temporal_key": "stime",
+      "rationale": "Large partitions and stime/ltime require chunk-safe chronological planning."
+    },
+    "N-BaIoT": {
+      "strategy": "device-aware grouped split",
+      "grouping_key": "device_id",
+      "temporal_key": null,
+      "rationale": "Device identity is a domain/group variable, not a direct model input."
+    }
+  }
+}
+

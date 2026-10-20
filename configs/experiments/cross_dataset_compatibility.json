@@ -1,0 +1,23 @@
+{
+  "version": "cross-dataset-compatibility-v1",
+  "datasets": ["CICIDS2017", "Edge-IIoTset", "BoT-IoT", "N-BaIoT"],
+  "cells": {
+    "CICIDS2017->CICIDS2017": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "CICIDS2017->Edge-IIoTset": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "CICIDS2017->BoT-IoT": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "CICIDS2017->N-BaIoT": {"status": "N/A", "reason": "incompatible representation"},
+    "Edge-IIoTset->CICIDS2017": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "Edge-IIoTset->Edge-IIoTset": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "Edge-IIoTset->BoT-IoT": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "Edge-IIoTset->N-BaIoT": {"status": "N/A", "reason": "incompatible representation"},
+    "BoT-IoT->CICIDS2017": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "BoT-IoT->Edge-IIoTset": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "BoT-IoT->BoT-IoT": {"status": "compatible", "profile": "FLOW_COMPATIBLE_C_E_B"},
+    "BoT-IoT->N-BaIoT": {"status": "N/A", "reason": "incompatible representation"},
+    "N-BaIoT->CICIDS2017": {"status": "N/A", "reason": "incompatible representation"},
+    "N-BaIoT->Edge-IIoTset": {"status": "N/A", "reason": "incompatible representation"},
+    "N-BaIoT->BoT-IoT": {"status": "N/A", "reason": "incompatible representation"},
+    "N-BaIoT->N-BaIoT": {"status": "compatible", "profile": "NBAIOT_SOURCE_AGGREGATE"}
+  },
+  "rationale": "N-BaIoT traffic files contain pre-aggregated KitNET-style host/host-pair damped-window statistics, not raw flow fields. No lossless or scientifically defensible direct mapping exists from these aggregates to the CICIDS2017/Edge-IIoTset/BoT-IoT flow-compatible profile without fabricating semantics."
+}

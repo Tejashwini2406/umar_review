@@ -1,0 +1,158 @@
+{
+  "pareto_frontier_points": [
+    [
+      0.0,
+      0.856209,
+      12.950000000000001
+    ],
+    [
+      0.1,
+      0.954715,
+      12.75
+    ],
+    [
+      0.2,
+      0.982005,
+      2.45
+    ],
+    [
+      0.3,
+      0.991401,
+      2.325
+    ],
+    [
+      0.4,
+      0.994268,
+      2.15
+    ],
+    [
+      0.5,
+      0.995598,
+      1.725
+    ],
+    [
+      0.6,
+      0.995803,
+      1.5
+    ],
+    [
+      0.7,
+      0.996981,
+      2.25
+    ],
+    [
+      0.8,
+      0.997115,
+      6.45
+    ],
+    [
+      0.9,
+      0.997319,
+      7.449999999999999
+    ],
+    [
+      1.0,
+      0.997568,
+      8.55
+    ]
+  ],
+  "non_dominated_pareto_set": [
+    [
+      0.6,
+      0.995803,
+      1.5
+    ],
+    [
+      0.7,
+      0.996981,
+      2.25
+    ],
+    [
+      0.8,
+      0.997115,
+      6.45
+    ],
+    [
+      0.9,
+      0.997319,
+      7.449999999999999
+    ],
+    [
+      1.0,
+      0.997568,
+      8.55
+    ]
+  ],
+  "issues_ledger": [
+    {
+      "id": "ISSUE-01",
+      "category": "MAJOR",
+      "area": "Clean Detection Performance Narrative",
+      "current_claim": "Option C probability fusion restores mean ROC-AUC to 0.9970, improving detection accuracy...",
+      "problem": "Pure Random Forest clean mean ROC-AUC (0.9976) is slightly higher than Option C (0.9970). Option C does NOT improve clean detection accuracy over RF.",
+      "safe_replacement_wording": "Option C preserves near-RF clean detection performance (0.9970 vs 0.9976) while enabling neural privacy and robustness studies."
+    },
+    {
+      "id": "ISSUE-02",
+      "category": "MAJOR",
+      "area": "Adaptive Attack Threat Model Labeling",
+      "current_claim": "Option C provides robust white-box defense against adversarial attacks.",
+      "problem": "Discrete decision trees prevent exact white-box gradient computation. Phase 5 evaluates a surrogate-based adaptive attack. Evasion ASR increases to 11.8% on Edge-IIoTset (+8.0 pp).",
+      "safe_replacement_wording": "Under an adaptive surrogate-gradient attack, Option C evasion increases to 11.8% on Edge-IIoTset, demonstrating that neural-stream robustness does not imply complete immunity to adaptive surrogate attacks."
+    },
+    {
+      "id": "ISSUE-03",
+      "category": "MAJOR",
+      "area": "Differential Privacy Scope",
+      "current_claim": "An adversarially robust and differentially private AI framework for IoT intrusion detection...",
+      "problem": "DP-SGD applies exclusively to the neural stream branch. The Random Forest stream and full Option C ensemble are non-private.",
+      "safe_replacement_wording": "Differential privacy (eps=2.37, delta=10^-5) is guaranteed exclusively on the neural stream branch; the Random Forest classifier is non-private."
+    },
+    {
+      "id": "ISSUE-04",
+      "category": "MAJOR",
+      "area": "Explainability Definition",
+      "current_claim": "Explainability via SHAP attributions for the fused Option C model.",
+      "problem": "Attribution is calculated as 0.7 * RF_norm + 0.3 * MLP_norm. It is a weighted component-level attribution, not exact game-theoretic SHAP for the non-linear fused predictor.",
+      "safe_replacement_wording": "Model explainability is delivered via Weighted Component Attribution Aggregation (0.7 RF + 0.3 MLP), not exact game-theoretic SHAP for the non-linear fused predictor."
+    },
+    {
+      "id": "ISSUE-05",
+      "category": "MAJOR",
+      "area": "Runtime Benchmark Scope",
+      "current_claim": "Host latency benchmarks establish a pure detection throughput of 16,505 samples/sec...",
+      "problem": "Benchmark measures classifier execution latency only. It excludes packet capture, flow construction, feature extraction, and XAI.",
+      "safe_replacement_wording": "Single-CPU host classifier inference throughput reaches 16,505 samples/sec at batch size N=1024, excluding network ingress and feature extraction."
+    },
+    {
+      "id": "ISSUE-06",
+      "category": "MINOR",
+      "area": "Surrogate Fidelity Generalization",
+      "current_claim": "A surrogate model faithfully approximates Random Forest decision boundaries.",
+      "problem": "Surrogate validation R^2 varies significantly across datasets (Edge: -0.59, NF: +0.95, ToN: +0.04, CIC: +0.54). High fidelity cannot be claimed universally.",
+      "safe_replacement_wording": "Surrogate model fidelity varies across network distributions (R^2 = -0.59 to +0.95), reflecting differences in decision tree boundary complexity."
+    },
+    {
+      "id": "ISSUE-07",
+      "category": "MINOR",
+      "area": "Statistical Confidence Interval Claims",
+      "current_claim": "Non-overlapping confidence intervals prove statistical significance.",
+      "problem": "Bootstrap CIs quantify finite-sample sampling uncertainty on held-out test splits; they do not constitute a formal paired significance test (e.g., DeLong test).",
+      "safe_replacement_wording": "Bootstrap 95% confidence intervals quantify sampling variation on the test split; formal paired hypothesis testing was not performed."
+    },
+    {
+      "id": "ISSUE-08",
+      "category": "MINOR",
+      "area": "Small Sample XAI Categories",
+      "current_claim": "Feature attributions across all attack sub-categories demonstrate threat-specific patterns.",
+      "problem": "Certain CICIoT2023 categories have very small sample counts (MITM N=11, Scanning N=9, Attack N=3).",
+      "safe_replacement_wording": "Feature attributions for low-frequency attack categories (N < 50) represent descriptive sample observations rather than statistically generalizable patterns."
+    }
+  ],
+  "summary": {
+    "critical_issues": 0,
+    "major_issues": 5,
+    "minor_issues": 3,
+    "no_issues_areas": 7
+  }
+}

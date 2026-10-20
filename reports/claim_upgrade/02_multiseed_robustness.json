@@ -1,0 +1,438 @@
+{
+  "Edge-IIoTset": {
+    "baseline_seeds": [
+      {
+        "seed": 42,
+        "val_auc": 0.9976075,
+        "val_asr": 0.009,
+        "selection_score": 0.9886075,
+        "te_auc": 0.9987525,
+        "te_f1": 0.9751175328849995,
+        "te_asr": 0.08
+      },
+      {
+        "seed": 43,
+        "val_auc": 0.9976075000000001,
+        "val_asr": 0.01,
+        "selection_score": 0.9876075000000001,
+        "te_auc": 0.9987525,
+        "te_f1": 0.9751175328849995,
+        "te_asr": 0.108
+      },
+      {
+        "seed": 44,
+        "val_auc": 0.9976275,
+        "val_asr": 0.0,
+        "selection_score": 0.9976275,
+        "te_auc": 0.99892875,
+        "te_f1": 0.9827296524465914,
+        "te_asr": 0.107
+      },
+      {
+        "seed": 45,
+        "val_auc": 0.9976075,
+        "val_asr": 0.011,
+        "selection_score": 0.9866075,
+        "te_auc": 0.9987525,
+        "te_f1": 0.9651123001022928,
+        "te_asr": 0.152
+      },
+      {
+        "seed": 46,
+        "val_auc": 0.997605,
+        "val_asr": 0.0,
+        "selection_score": 0.997605,
+        "te_auc": 0.9988724999999999,
+        "te_f1": 0.9827296524465914,
+        "te_asr": 0.003
+      },
+      {
+        "seed": 47,
+        "val_auc": 0.997605,
+        "val_asr": 0.0,
+        "selection_score": 0.997605,
+        "te_auc": 0.9988725,
+        "te_f1": 0.9751175328849995,
+        "te_asr": 0.104
+      },
+      {
+        "seed": 48,
+        "val_auc": 0.99762,
+        "val_asr": 0.0,
+        "selection_score": 0.99762,
+        "te_auc": 0.9989325,
+        "te_f1": 0.9827296524465914,
+        "te_asr": 0.079
+      },
+      {
+        "seed": 49,
+        "val_auc": 0.9976025000000001,
+        "val_asr": 0.0,
+        "selection_score": 0.9976025000000001,
+        "te_auc": 0.998875,
+        "te_f1": 0.9827296524465914,
+        "te_asr": 0.079
+      },
+      {
+        "seed": 50,
+        "val_auc": 0.9976050000000001,
+        "val_asr": 0.0,
+        "selection_score": 0.9976050000000001,
+        "te_auc": 0.998875,
+        "te_f1": 0.9751175328849995,
+        "te_asr": 0.003
+      },
+      {
+        "seed": 51,
+        "val_auc": 0.9976050000000001,
+        "val_asr": 0.0,
+        "selection_score": 0.9976050000000001,
+        "te_auc": 0.998875,
+        "te_f1": 0.9751175328849995,
+        "te_asr": 0.124
+      }
+    ],
+    "selected_checkpoint": {
+      "seed": 44,
+      "val_auc": 0.9976275,
+      "val_asr": 0.0,
+      "selection_score": 0.9976275,
+      "te_auc": 0.99892875,
+      "te_f1": 0.9827296524465914,
+      "te_asr": 0.107
+    },
+    "ensemble": {
+      "te_auc": 0.9988724999999999,
+      "te_f1": 0.9751175328849995,
+      "te_asr": 0.109,
+      "overhead_multiplier": 10.0
+    }
+  },
+  "NF-ToN-IoT-v2": {
+    "baseline_seeds": [
+      {
+        "seed": 42,
+        "val_auc": 0.99068,
+        "val_asr": 0.632,
+        "selection_score": 0.35868,
+        "te_auc": 0.9927062499999999,
+        "te_f1": 0.9858715725948876,
+        "te_asr": 0.448
+      },
+      {
+        "seed": 43,
+        "val_auc": 0.99237,
+        "val_asr": 0.043,
+        "selection_score": 0.9493699999999999,
+        "te_auc": 0.99270375,
+        "te_f1": 0.9284705232865604,
+        "te_asr": 0.012
+      },
+      {
+        "seed": 44,
+        "val_auc": 0.9912925,
+        "val_asr": 0.206,
+        "selection_score": 0.7852925000000001,
+        "te_auc": 0.99274125,
+        "te_f1": 0.9867648087609403,
+        "te_asr": 0.045
+      },
+      {
+        "seed": 45,
+        "val_auc": 0.9923924999999999,
+        "val_asr": 0.18,
+        "selection_score": 0.8123924999999999,
+        "te_auc": 0.99270625,
+        "te_f1": 0.9294624294624294,
+        "te_asr": 0.041
+      },
+      {
+        "seed": 46,
+        "val_auc": 0.9890025,
+        "val_asr": 0.677,
+        "selection_score": 0.31200249999999996,
+        "te_auc": 0.990995,
+        "te_f1": 0.9284705232865604,
+        "te_asr": 0.475
+      },
+      {
+        "seed": 47,
+        "val_auc": 0.9898625,
+        "val_asr": 0.067,
+        "selection_score": 0.9228624999999999,
+        "te_auc": 0.99069875,
+        "te_f1": 0.9284705232865604,
+        "te_asr": 0.007
+      },
+      {
+        "seed": 48,
+        "val_auc": 0.98993,
+        "val_asr": 0.174,
+        "selection_score": 0.81593,
+        "te_auc": 0.99043125,
+        "te_f1": 0.9304524761899085,
+        "te_asr": 0.05
+      },
+      {
+        "seed": 49,
+        "val_auc": 0.99113,
+        "val_asr": 0.26,
+        "selection_score": 0.73113,
+        "te_auc": 0.9923575,
+        "te_f1": 0.9294624294624294,
+        "te_asr": 0.069
+      },
+      {
+        "seed": 50,
+        "val_auc": 0.9901350000000001,
+        "val_asr": 0.214,
+        "selection_score": 0.7761350000000001,
+        "te_auc": 0.990525,
+        "te_f1": 0.9304524761899085,
+        "te_asr": 0.045
+      },
+      {
+        "seed": 51,
+        "val_auc": 0.9911774999999999,
+        "val_asr": 0.183,
+        "selection_score": 0.8081775,
+        "te_auc": 0.9927287499999999,
+        "te_f1": 0.9284705232865604,
+        "te_asr": 0.044
+      }
+    ],
+    "selected_checkpoint": {
+      "seed": 43,
+      "val_auc": 0.99237,
+      "val_asr": 0.043,
+      "selection_score": 0.9493699999999999,
+      "te_auc": 0.99270375,
+      "te_f1": 0.9284705232865604,
+      "te_asr": 0.012
+    },
+    "ensemble": {
+      "te_auc": 0.9907137500000001,
+      "te_f1": 0.9294624294624294,
+      "te_asr": 0.045,
+      "overhead_multiplier": 10.0
+    }
+  },
+  "ToN-IoT": {
+    "baseline_seeds": [
+      {
+        "seed": 42,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 43,
+        "val_auc": 1.0,
+        "val_asr": 0.001,
+        "selection_score": 0.999,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.001
+      },
+      {
+        "seed": 44,
+        "val_auc": 0.9999999999999999,
+        "val_asr": 0.0,
+        "selection_score": 0.9999999999999999,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 45,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 46,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 47,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 48,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 49,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 50,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      },
+      {
+        "seed": 51,
+        "val_auc": 1.0,
+        "val_asr": 0.0,
+        "selection_score": 1.0,
+        "te_auc": 1.0,
+        "te_f1": 1.0,
+        "te_asr": 0.0
+      }
+    ],
+    "selected_checkpoint": {
+      "seed": 42,
+      "val_auc": 1.0,
+      "val_asr": 0.0,
+      "selection_score": 1.0,
+      "te_auc": 1.0,
+      "te_f1": 1.0,
+      "te_asr": 0.0
+    },
+    "ensemble": {
+      "te_auc": 1.0,
+      "te_f1": 1.0,
+      "te_asr": 0.0,
+      "overhead_multiplier": 10.0
+    }
+  },
+  "CICIoT2023": {
+    "baseline_seeds": [
+      {
+        "seed": 42,
+        "val_auc": 0.999165,
+        "val_asr": 0.004,
+        "selection_score": 0.995165,
+        "te_auc": 0.9963875,
+        "te_f1": 0.9282407955020384,
+        "te_asr": 0.011
+      },
+      {
+        "seed": 43,
+        "val_auc": 0.9989575,
+        "val_asr": 0.005,
+        "selection_score": 0.9939575,
+        "te_auc": 0.996115,
+        "te_f1": 0.9213191408050176,
+        "te_asr": 0.011
+      },
+      {
+        "seed": 44,
+        "val_auc": 0.99891,
+        "val_asr": 0.005,
+        "selection_score": 0.99391,
+        "te_auc": 0.9959500000000001,
+        "te_f1": 0.9352948413584438,
+        "te_asr": 0.014
+      },
+      {
+        "seed": 45,
+        "val_auc": 0.999015,
+        "val_asr": 0.005,
+        "selection_score": 0.994015,
+        "te_auc": 0.9961375,
+        "te_f1": 0.9332451542317803,
+        "te_asr": 0.015
+      },
+      {
+        "seed": 46,
+        "val_auc": 0.99912,
+        "val_asr": 0.005,
+        "selection_score": 0.99412,
+        "te_auc": 0.99627,
+        "te_f1": 0.9418218085106382,
+        "te_asr": 0.012
+      },
+      {
+        "seed": 47,
+        "val_auc": 0.9991700000000001,
+        "val_asr": 0.007,
+        "selection_score": 0.9921700000000001,
+        "te_auc": 0.9965025,
+        "te_f1": 0.9477126203189272,
+        "te_asr": 0.013
+      },
+      {
+        "seed": 48,
+        "val_auc": 0.9990325,
+        "val_asr": 0.012,
+        "selection_score": 0.9870325,
+        "te_auc": 0.9961725,
+        "te_f1": 0.9524919021742958,
+        "te_asr": 0.029
+      },
+      {
+        "seed": 49,
+        "val_auc": 0.9990325,
+        "val_asr": 0.007,
+        "selection_score": 0.9920325,
+        "te_auc": 0.9963124999999999,
+        "te_f1": 0.9419194079928229,
+        "te_asr": 0.016
+      },
+      {
+        "seed": 50,
+        "val_auc": 0.9990725,
+        "val_asr": 0.005,
+        "selection_score": 0.9940725,
+        "te_auc": 0.9960525,
+        "te_f1": 0.9428747227124792,
+        "te_asr": 0.015
+      },
+      {
+        "seed": 51,
+        "val_auc": 0.998935,
+        "val_asr": 0.006,
+        "selection_score": 0.992935,
+        "te_auc": 0.9958425,
+        "te_f1": 0.9400037400265957,
+        "te_asr": 0.015
+      }
+    ],
+    "selected_checkpoint": {
+      "seed": 42,
+      "val_auc": 0.999165,
+      "val_asr": 0.004,
+      "selection_score": 0.995165,
+      "te_auc": 0.9963875,
+      "te_f1": 0.9282407955020384,
+      "te_asr": 0.011
+    },
+    "ensemble": {
+      "te_auc": 0.9962375,
+      "te_f1": 0.9399024390243902,
+      "te_asr": 0.013,
+      "overhead_multiplier": 10.0
+    }
+  }
+}

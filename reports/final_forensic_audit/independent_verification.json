@@ -1,0 +1,74 @@
+{
+  "verdict": {
+    "Phase_0": "PASS",
+    "Phase_1": "PASS",
+    "Phase_2": "PASS",
+    "Phase_3": "PASS",
+    "Phase_4": "PASS",
+    "Phase_5": "PASS",
+    "Phase_6": "PASS",
+    "Phase_7": "PASS"
+  },
+  "git_commit": "c8ffa15f03e61fe601994bf53396b8614d9d3596",
+  "working_tree_clean": false,
+  "all_checkpoint_hashes_match": true,
+  "report_file_hashes": {
+    "golden_run_manifest.json": "e6794b1c9da509c4ba4fd1e07ba79fe8dd03b8d34e00fc1de735f851f9b294ce",
+    "fusion_ablation_results.json": "6269d78cc8f0bc98c3c0a7c80d6b909f2738ceb35a51bf1107d9563c3b3dff95",
+    "table_statistical_confidence_intervals.json": "c4f0e73753c17ae27fa193e3e1d2e36076629ddbf7aad420ef0f8777a05e909b",
+    "xai_attack_breakdown.json": "df83ccf0cca31914bd2bdddcadc0a03d62f6bd0ea5a2ba3f8bc8df34f14216d1",
+    "adaptive_attack_results.json": "f5209fdbac15925d8d74e9edafe10fdaf20ef26d0916167108b4f3a677e81db0",
+    "final_forensic_audit.json": "730de78af3270f0999815257ce1987f6f322efe4b06adfe831d2b38b32445bc7"
+  },
+  "recomputed_clean_metrics": {
+    "Edge-IIoTset": {
+      "rf_roc_auc": 0.9995,
+      "std_mlp_roc_auc": 0.8443,
+      "robust_mlp_roc_auc": 0.8002,
+      "option_c_roc_auc": 0.9988,
+      "rf_macro_f1": 0.9014,
+      "option_c_macro_f1": 0.9751
+    },
+    "NF-ToN-IoT-v2": {
+      "rf_roc_auc": 0.994,
+      "std_mlp_roc_auc": 0.8398,
+      "robust_mlp_roc_auc": 0.8299,
+      "option_c_roc_auc": 0.9927,
+      "rf_macro_f1": 0.9903,
+      "option_c_macro_f1": 0.9285
+    },
+    "ToN-IoT": {
+      "rf_roc_auc": 1.0,
+      "std_mlp_roc_auc": 0.7745,
+      "robust_mlp_roc_auc": 0.8063,
+      "option_c_roc_auc": 1.0,
+      "rf_macro_f1": 1.0,
+      "option_c_macro_f1": 1.0
+    },
+    "CICIoT2023": {
+      "rf_roc_auc": 0.9968,
+      "std_mlp_roc_auc": 0.9776,
+      "robust_mlp_roc_auc": 0.9884,
+      "option_c_roc_auc": 0.9965,
+      "rf_macro_f1": 0.9377,
+      "option_c_macro_f1": 0.9292
+    }
+  },
+  "recomputed_mean_ablation": {
+    "0.0": 0.8562,
+    "0.1": 0.9547,
+    "0.2": 0.982,
+    "0.3": 0.9914,
+    "0.4": 0.9943,
+    "0.5": 0.9956,
+    "0.6": 0.9958,
+    "0.7": 0.997,
+    "0.8": 0.9971,
+    "0.9": 0.9973,
+    "1.0": 0.9976
+  },
+  "calculated_percentages": {
+    "clean_retention_pct": 99.94,
+    "asr_reduction_pct": 83.08
+  }
+}

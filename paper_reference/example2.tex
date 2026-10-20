@@ -1,0 +1,443 @@
+\documentclass[conference,a4paper]{IEEEtran}
+\IEEEoverridecommandlockouts
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{stfloats}
+\usepackage{hyperref}
+\usepackage{array} 
+\usepackage{float}
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+\usepackage{doi}
+\usepackage{hyperref} 
+\makeatletter
+\def\ps@IEEEtitlepagestyle{%
+  \def\@oddhead{\footnotesize 2026 2nd International Conference on Distributed Systems, Computer Networks and Cybersecurity (ICDSCNC)\hfill}%
+  \def\@oddfoot{\footnotesize 979-8-3195-2964-0/26/\$31.00 \copyright2026 IEEE\hfill}%
+  \def\@evenhead{}%
+  \def\@evenfoot{}%
+}
+\makeatother
+
+\lstset{
+    backgroundcolor=\color[rgb]{0.95,0.95,0.92},   
+    commentstyle=\color[rgb]{0,0.6,0},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color[rgb]{0.5,0.5,0.5},
+    stringstyle=\color[rgb]{0.58,0,0.82},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                  
+    captionpos=b,                    
+    keepspaces=true,                  
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\begin{document}
+
+\title{TVRM: A Tri-Vector Risk Model for Privacy-Adjusted Vulnerability Prioritization in Integrated Security and Privacy Governance}
+
+\author{\IEEEauthorblockN{Tejashwini S Uranakar}
+\IEEEauthorblockA{\textit{Department of Information Science \& Engineering} \\
+\textit{BMS Institute of Technology \& Management}\\
+Bengaluru, India \\
+tejashwinisuranakar@ieee.org}
+\and
+\IEEEauthorblockN{Arun Kumar B R}
+\IEEEauthorblockA{\textit{Department of Information Science \& Engineering} \\
+\textit{BMS Institute of Technology \& Management}\\
+Bengaluru, India \\
+arunkumarbr@bmsit.in}
+}
+
+\maketitle
+
+\begin{abstract}
+Vulnerability prioritization based on traditional Common Vulnerability Scoring System (CVSS) measurements takes place independently of the sensitivity of the underlying data and the efficacy of defenses employed, creating huge remediation backlogs and wasted resources. In this paper, a novel approach called the Tri-Vector Risk Model (TVRM) is proposed along with its key mathematical tool for risk prioritization and computation—the Privacy Adjusted Risk Score (PARS), which integrates CVSS software vulnerability measurements, Privacy Impact Ratings (PIR), and Control Effectiveness Scores (CES). Tested on a real-life telehealth infrastructure layer with 1,245 monitored assets, the PARS methodology eliminates priority inconsistencies by considering the dynamic context of enterprise assets. The implementation of PARS results in a quantifiable 66.7\% reduction in urgent alerts and shifts the critical backlog from 42\% down to 14\%, alongside a reduction of critical vulnerability resolution timeframes from 14 days to under 24 hours.
+\end{abstract}
+
+\begin{IEEEkeywords}
+VAPT, CVSS, Privacy Risk Scoring, Internet of Medical Things (IoMT), Governance, Risk, and Compliance (GRC), Risk Prioritization, Vulnerability Management.
+\end{IEEEkeywords}
+
+\section{Introduction and Problem Statement}
+\subsection{Motivation: The Governance Context Gap}
+Since the standard adoption of dynamic evaluation practices, CVSS scoring has been used in cybersecurity as the deterministic language for risk calculation. Remediation backlogs resulting from Vulnerability Assessment and Penetration Testing (VAPT) engagements are scheduled based on numerical priority alone. This approach is no longer valid in today's data-centric enterprises where Internet of Medical Things (IoMT) or healthcare networks are commonplace and where severity metrics remain fully independent of the underlying data context~\cite{b1},~\cite{b2}. The outcome is significant engineering inefficiencies; for example, rapid patch remediation may be scheduled for a severe buffer overflow in a legacy isolated internal test system, while a medium technical vulnerability such as Broken Object Level Authorization (BOLA) in an API gateway protecting live genomic datasets goes untriaged. Traditional risk matrices fail to account for: (a) Privacy Classification Expansion Factors associated with data processed by the assets layer; and (b) Real-time Health Status of adjacent compensating controls.
+
+\subsection{Research Gap}
+Modern literature underscores considerable expansion in terms of intelligent and interconnected architecture in the health care system, focusing on the most important vulnerabilities within these systems~\cite{b13},~\cite{b14}. However, the current models do not consider privacy engineering and security activities as related processes. While the qualitative PIA models consider compliance aspects~\cite{b17}, they do not have any automation capabilities that can affect the technical backlog. On the other hand, technical vulnerability measures do not consider data sensitivity, considering all the backend hosts as equal nodes. To the best of operational knowledge at this current time, the model suggested in this research is the first one in which CVSS software vulnerabilities, PIR and CES are mathematically integrated into a unified model~\cite{b19}.
+
+\subsection{Research Objectives}
+The four main structural goals for the investigation are as follows: (1) Derive an integrated and normalized multi-vector mathematical equation (TVRM/PARS), complete with edge case clamps to ensure no boundary truncation; (2) Build a replicable data pipeline prototype capable of receiving and correlating data from scanner telematics data logs, asset inventories, and governance metrics; (3) Test the behavior of the model on a local telehealth system dataset with regard to inverted rank profiles compared to standard Risk-Based Vulnerability Management (RBVM); and (4) Validate the bounding features using sensitivity multivariable equations and Monte Carlo simulations.
+
+\section{Background and Related Work}
+\subsection{Security and Privacy Complexities in Modern IoT and IoMT}
+Networked IoT infrastructures have significantly increased the attack surfaces of enterprises, posing new threats to infrastructure security~\cite{b1}. For IoMT infrastructures, the situation is further exacerbated due to the mandatory regulatory policies concerning PHI and bio-streaming channels as per HIPAA and GDPR guidelines~\cite{b14},~\cite{b15}. According to recent survey reports, periodic and manual approaches for assessing risks fail to handle dynamic data exposure problems in these environments~\cite{b2}, an issue that gets worse with the advent of self-governing systems managing distributed data records with undefined organizational boundaries~\cite{b5},~\cite{b8}.
+
+\subsection{Vulnerability Prioritization Limitations and Risk Modeling}
+Risk-based vulnerability prioritization aims at adding external threat intelligence feeds and grouping assets to technical severity scoring. Environmental changes in the CVSS v3.1 and v4.0 frameworks are seldom considered owing to the complexity of managing CMDB~\cite{b9}. Commercial solutions counterbalance this with operational categorization, which does not distinguish internal data layers, privacy exposure parameters in real time ($PIR$), and verification logs for compensating defense systems ($CES$). This approach makes defense ineffective and creates exposure vectors for distributed medical network infrastructure~\cite{b4},~\cite{b18}. Current models such as EPSS estimate the probability of exploiting vulnerabilities but have nothing to do with the internal asset and data environment~\cite{b16}. TVRM addresses this problem by integrating technical vulnerability with compliance and defense decay governance.
+
+\subsection{Evolution of Privacy Impact and Hybrid Risk Architectures}
+Data liabilities of enterprises shifted the focus of research towards multi-criteria risk models using hybrid Bayesian networks, logistic regressions, and exposure profiles~\cite{b19},~\cite{b6}. In terms of governance, current compliance approaches provide abstract definitions of probability and impact but fail to link them to any technical, live automated telemetry feeds~\cite{b17}. Audit-based approaches create large delays in assessing the risks, leading to out-of-date risk logging even before the scan of vulnerable assets is done~\cite{b12},~\cite{b16}.
+
+\section{Theoretical Framework: Tri-Vector Risk Model (TVRM)}
+\subsection{Model Architecture}
+The TVRM framework tackles the contextual governance gap by postulating risk exposure along three independent vectors. These vectors are mapped onto concrete operations and bounds as structurally defined in Table~\ref{tab:vectors}.
+
+\begin{table}[htbp]
+\caption{TVRM Vector Structural Mapping}
+\begin{center}
+\begin{tabular}{lp{2.4cm}p{2.7cm}}
+\toprule
+\textbf{Vector} & Conceptual Focus & Mathematical Output \\
+\midrule
+Vulnerability (VV) & Baseline Software Flaw Severity & $\text{CVSS}_{\text{Score}}$ ($0.0$--$10.0$) \\
+Control (CV)       & Compensating Control Efficacy  & $\text{CES Coefficient}$ ($0.0$--$1.0$) \\
+Privacy (PV)       & Data Asset Sensitivity Band    & $\text{PIR Scale}$ ($1.0$--$3.0$) \\
+\bottomrule
+\end{tabular}
+\label{tab:vectors}
+\end{center}
+\end{table}
+
+\subsection{Multiplicative Privacy Scaling Logic and Formal Normalization}
+The Privacy Impact Rating (PIR) acts as a multiplicative weight applied to the impact score of any software vulnerability, representing the nonlinear magnification of the consequences of a data breach~\cite{b6}. For maintaining predictably bounded levels of compliance and ensuring SLA management, the Privacy Adjusted Risk Score (PARS) converts the multi-factorial product into a standard industry linear range of [0.0, 10.0]. Given a $\text{CVSS}_{\text{Score}}$ in [0.0, 10.0], PIR in [1.0, 3.0] and CES in [0.0, 1.0], the maximum unnormalized value of the risk evaluation would be $10.0 \times (3.0 - 0.0) = 30.0$. This mathematical consistency and bottom floor constraint are guaranteed through the application of a max-clamping function in Equation~\eqref{eq:pars_core}:
+\begin{equation}
+\text{PARS} = \max\left(0.0, \, \frac{\text{CVSS}_{\text{Score}} \times (\text{PIR} - \text{CES})}{3.0} \times 10.0 \right)
+\label{eq:pars_core}
+\end{equation}
+In the denominator of the normalization equation~\eqref{eq:pars_core}, the constant 3.0 is used to normalize the domain. Since the technical severity score ($\text{CVSS}_{\text{Score}}$) is capped at 10.0, and the raw context scaling function ($\text{PIR} - \text{CES}$) obtains its maximum value of 3.0 for values of $\text{PIR} = 3.0$ and $\text{CES} = 0.0$, the un-normalized supremum value of the product is 30.0. Normalizing by the constant 3.0 effectively balances the output back to the traditional range of [0.0, 10.0].
+
+\subsection{Step-by-Step Computational Walkthrough Example}
+In order to elaborate on the computational aspects of the normalizing formula as expressed in Equation~\eqref{eq:pars_core}, it can be noted that when the production genomic endpoint is working under observation for which $\text{CVSS}_{\text{Score}} = 6.5$, $\text{PIR} = 3.0$, and $\text{CES} = 0.8571$. Substituting these active variables into Equation~\eqref{eq:pars_core} yields the localized computational pipeline transformations:
+\begin{align*}
+\text{PARS}_{\text{raw}} &= 6.5 \times (3.0 - 0.8571) = 13.9288 \\
+\text{PARS}_{\text{scaled}} &= \frac{13.9288}{3.0} \times 10.0 \approx \mathbf{4.64}
+\end{align*}
+
+\subsection{Mathematical Soundness and Sensitivity Analysis}
+Predictable, monotonic bounding across corporate deployments is verified by calculating the partial derivatives of the core score expression under standard operational parameters ($\text{PIR} > \text{CES}$):
+\begin{itemize}
+    \item \textbf{Vulnerability Gradient:} The partial derivative defined in \eqref{eq:deriv_cvss} confirms that as the underlying software flaw severity rises, the remediation priority accelerates predictably:
+    \begin{equation}
+    \frac{\partial \text{PARS}}{\partial \text{CVSS}} = \frac{10}{3}(\text{PIR} - \text{CES}) > 0
+    \label{eq:deriv_cvss}
+    \end{equation}
+    \item \textbf{Privacy Gradient:} The partial derivative defined in \eqref{eq:deriv_pir} establishes that assets transitioning into broader regulatory compliance overlays scale remediation requirements upward:
+    \begin{equation}
+    \frac{\partial \text{PARS}}{\partial \text{PIR}} = \frac{10}{3}\text{CVSS} \ge 0
+    \label{eq:deriv_pir}
+    \end{equation}
+    \item \textbf{Control Gradient:} The partial derivative defined in \eqref{eq:deriv_ces} mathematically validates the risk reduction and mitigation dampening effect of active, verified technical controls:
+    \begin{equation}
+    \frac{\partial \text{PARS}}{\partial \text{CES}} = -\frac{10}{3}\text{CVSS} \le 0
+    \label{eq:deriv_ces}
+    \end{equation}
+\end{itemize}
+\subsection{Privacy Impact Rating (PIR) Continuous Expansion}
+To balance multiple overlapping regulatory requirements (such as GDPR, HIPAA, and CCPA applied simultaneously), the discrete baseline sensitivity scale can be expanded into a fractional domain $\text{PIR}_{\text{fractional}} \in [1.0, 3.0]$ as formulated in Equation~\eqref{eq:pir_fractional}. Let $J$ denote the total count of active regulatory overlays on a target node, and let $\alpha \in [0.0, 1.0]$ act as an organizational data density parameter:
+\begin{equation}
+\text{PIR}_{\text{fractional}} = \min\left(3.0, \text{PIR}_{\text{base}} + \sum_{j=1}^{J} \alpha_j \right)
+\label{eq:pir_fractional}
+\end{equation}
+Fractional differences can thus be restricted through overlapping legislation rules, thereby addressing any rigidity that arises from classification and creating clear compatibility with theoretical privacy models~\cite{b5}.
+
+\subsection{Continuous Control Effectiveness Score (CES) Computation}
+For calculation of the $\text{CES}$, technical flaws are mapped to active compensating controls through an enterprise control matrix. Let $\sigma_i$ denote compliance status, where $\text{Satisfied} \mapsto 1.0$, $\text{Other than Satisfied} \mapsto 0.5$, and $\text{Not Satisfied} \mapsto 0.0$. To mitigate reliance on stale, point-in-time GRC data, temporal confidence decay is introduced via \eqref{eq:ces_decay}. Let $t_i$ be the days elapsed since the last automated or manual verification audit, and let $\lambda = 0.015$ act as the analytically calibrated organizational risk decay constant:
+\begin{equation}
+\text{CES} = \frac{\sum_{i=1}^{n} w_i \sigma_i e^{-\lambda t_i}}{\sum_{i=1}^{n} w_i}
+\label{eq:ces_decay}
+\end{equation}
+
+The temporal decay rate $\lambda = 0.015$ defined in \eqref{eq:ces_decay} results in an operational control half-life ($t_{1/2}$) of $46.2$~days, derived from the expression $e^{-\lambda t} = 0.5$. From the perspective of operational control, this approximately 45-day span represents the operational midpoint between continuous automated security scanning and standard quarterly compliance checks within the enterprise, allowing unverified controls to halve their risk mitigation capability in a systematic, predictable manner. 
+
+The structural loading weight ($w_i$) in \eqref{eq:ces_decay} is obtained via Delphi expert opinion mapping. Perturbation analysis evaluating a range of $\pm 20\%$ results in a low standard deviation ($\sigma = 0.034$), demonstrating that the model is robustly insensitive to potential subjective bias during the manual weight assignment process. Within this weighting scheme, network boundary defense systems are assigned the highest weight ($w_i = 1.0$), while the logging policy weight is adjusted accordingly to $w_i = 0.25$~\cite{b19}.
+
+\subsection{Privacy Impact Rating (PIR) Scale}
+Enterprise directory asset tags correspond directly to three levels of regulatory privacy impact according to data sensitivity: 1 (least sensitive) corresponding to telemetry with no personally identifiable information or temporary test software; 2 (mostly sensitive) corresponding to corporate ledgers, transaction databases, and customer records under corporate policies; 3 (most sensitive) corresponding to Protected Health Information (PHI) and genetic, and bio-telemetry data.
+
+\section{Dataset and Simulation Setup}
+\subsection{Project Guardian Pipeline Ingestion Architecture}
+The validation architecture was executed using an empirical telemetry dataset within the test bed of Project Guardian, modeling 1,245 digital assets in a running telehealth cloud network. The system dynamically ingests data across three production tracking streams: \textit{VV Input Feed} (\url{data/vv_findings_from_nessus.csv}) for technical flaws; \textit{PV Asset Index} (\url{data/cmdb_assets.csv}) for directory metadata; and \textit{CV GRC Database} (\url{data/control_assessments.csv}) for compliance tracking logs. As visually conceptualized in Fig.~\ref{fig:pipeline_flow}, incoming streams are normalized and combined simultaneously before parsing through the core multi-vector risk engine.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/pipeline_flow_improved.png}
+  \caption{TVRM Data Processing Pipeline and Telemetry Ingestion Flow Architecture.}
+  \label{fig:pipeline_flow}
+\end{figure}
+
+\subsection{Pipeline Ingestion Schema and Reference Metrics}
+The record schema tracking in the data ingestion pipeline for the normalized PARS scenario is documented in Table~\ref{tab:pipeline_schema}.
+
+\begin{table}[htbp]
+\caption{TVRM Pipeline Record Ingestion Schema}
+\begin{center}
+\begin{tabular}{lccccr}
+\toprule
+\textbf{Finding ID} & \textbf{Asset ID} & \textbf{CVSS} & \textbf{PIR} & \textbf{CES} & \textbf{PARS} \\
+\midrule
+VULN-001 & API-GEN-01   & 6.5 & 3.0 & 0.8571 & 4.64 \\
+VULN-002 & API-TEST-02  & 8.2 & 2.0 & 0.7667 & 3.37 \\
+VULN-003 & PORTAL-UI-03 & 5.3 & 2.0 & 0.7692 & 2.17 \\
+VULN-004 & S3-CONFIG-04 & 7.1 & 1.0 & 0.5000 & 1.18 \\
+VULN-005 & API-GEN-01   & 4.8 & 3.0 & 0.0000 & 4.80 \\
+\bottomrule
+\end{tabular}
+\label{tab:pipeline_schema}
+\end{center}
+\end{table}
+
+\section{Methodology and Pipeline Algorithmic Design}
+\subsection{Logical Ingestion Architecture}
+The orchestrating model, which has been implemented using the Python programming language, collects infrastructure information from multiple sources into a single remediation queue. As shown in Fig.~\ref{fig:pipeline_flow}, data is parsed, checked against validation schemas, and structural scores are processed sequentially. The process logic, flows, and routes for the loop execution path are described in Fig.~\ref{fig:fig2_engine} as per the native engineering approach.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/fig2.png}
+  \caption{TVRM Data Processing Pipeline Workflow Mapping.}
+  \label{fig:fig2_engine}
+\end{figure}
+
+\section{Experimental Evaluation and Priority Matrix Comparison}
+For the evaluation of the scheduling capability, the movement from a traditional CVSS triage queuing system to the context-aware PARS score system is analyzed in Table~\ref{tab:priority_comparison}.
+
+\begin{table}[htbp]
+\caption{Vulnerability Triage Priority Matrix Comparison}
+\begin{center}
+\begin{tabular}{lcm{1.8cm}cm{1.9cm}}
+\toprule
+\textbf{Finding ID} & \textbf{CVSS} & \textbf{Traditional Priority} & \textbf{PARS} & \textbf{Adjusted Priority} \\
+\midrule
+VULN-005 & 4.8 & Medium (90d)  & 4.80  & \textbf{CRITICAL (24h)} \\
+VULN-001 & 6.5 & Medium (90d)  & 4.64  & \textbf{CRITICAL (24h)} \\
+VULN-002 & 8.2 & High (30d)    & 3.37  & High (7d) \\
+VULN-003 & 5.3 & Medium (90d)  & 2.17  & Medium (30-90d) \\
+VULN-004 & 7.1 & High (30d)    & 1.18  & \textbf{Medium (30-90d)} \\
+\bottomrule
+\end{tabular}
+\label{tab:priority_comparison}
+\end{center}
+\end{table}
+
+Adjustments based on multiple vectors are used to account for changes systematically across test boundaries~\cite{b19}. It can be demonstrated that the transformation process leads to a structurally scaled priority rearrangement that de-prioritizes vulnerabilities belonging to assets with low sensitivity and elevates the severity of CVSS flaws crossing high-exposure data layers~\cite{b6}. The analysis of the entire 1,245 nodes dataset from Project Guardian has uncovered several improvements. Using standard CVSS processes, 42\% of the active flaw queue was classified as either Critical or High, causing alert fatigue. However, the PARS framework scales flaws with functional control and restricts only 14\% of the active flaw queue to Critical status, which represents a 66.7\% reduction over traditional CVSS allocations. Furthermore, the SLA completion timeline was compressed to less than 24 hours for exposed critical assets from a 14-day administrative timeline.
+
+\section{Comparative Evaluation and Paradigm Benchmarking}
+\subsection{Ground Truth and Baseline Model Benchmarking}
+The PARS output was compared to the CVSS Base score, the CVSS Environmental score with target distribution modifiers (CVSS+E)~\cite{b9}, and Exploit Prediction Scoring System (EPSS) vectors~\cite{b16} to measure framework efficiency using a programmatic evaluation pipeline. The cross-paradigm tracking statistics are represented in Table~\ref{tab:paradigm_matrix}.
+
+\begin{table}[htbp]
+\caption{Risk Modeling Paradigm Comparison Matrix}
+\begin{center}
+\begin{tabular}{lccccr}
+\toprule
+\textbf{Finding ID} & \textbf{Base} & \textbf{+E} & \textbf{EPSS} & \textbf{PARS} & \textbf{Inversion Shift Strategy} \\
+\midrule
+VULN-005 & 4.8 & 5.2 & 0.021 & 4.80 & Critical SLA Override \\
+VULN-002 & 8.2 & 7.8 & 0.841 & 3.37 & High Priority Stable \\
+VULN-004 & 7.1 & 4.5 & 0.110 & 2.47  & Context Downgrade \\
+\bottomrule
+\end{tabular}
+\label{tab:paradigm_matrix}
+\end{center}
+\end{table}
+
+This proves that while EPSS efficiently captures the possibility of exploitation~\cite{b16}, it does not reveal details regarding the sensitivity of underlying data or the corporate privacy risks involved. Similarly, CVSS environmental scores consider accessibility parameters of the infrastructure, but award equal weightage across all backend databases~\cite{b9}. However, PARS successfully balances both these requirements in such a way that a technically minor issue like VULN-005 gets due attention based on environmental variables.
+
+\subsection{Methodological Ablation Analysis}
+In order to determine the significance of the particular vector changes (PIR and CES), a structural feature ablation mapping was carried out, as shown in Table~\ref{tab:ablation_matrix}.
+
+\begin{table}[htbp]
+\caption{Framework Feature Mapping and Ablation Matrix}
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Evaluation Vector} & \textbf{CVSS} & \textbf{EPSS} & \textbf{PIR} & \textbf{CES} \\
+\midrule
+CVSS Base Framework        & Yes & No  & No  & No   \\
+CVSS Environmental (+E)    & Yes & No  & Partial & No   \\
+EPSS Predictor Pipeline    & No  & Yes & No  & No   \\
+\textbf{PARS (Proposed Model)} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} & \textbf{Yes} \\
+\bottomrule
+\end{tabular}
+\label{tab:ablation_matrix}
+\end{center}
+\end{table}
+
+\subsection{Stochastic Simulation and Multi-Variable Bounds}
+The predictability of system behavior was evaluated through a Monte Carlo simulation grid consisting of 10,000 simulations using randomized parameter values for assets. The input vectors were defined based on common stochastic probability distribution functions: the CVSS Score was approximated by a Beta distribution ($\alpha = 2, \beta = 5$) to mimic characteristics found in the National Vulnerability Database; the PIR value was modeled by a discrete uniform distribution in the range [1.0, 3.0]; and CES factors were simulated by a normal distribution ($\mu = 0.7, \sigma = 0.15$) in order to capture temporal decay parameters. The convergence of system states was guaranteed by applying boundary conditions as shown in Equation~\eqref{eq:convergence_criterion}:
+\begin{equation}
+\Delta R < 0.01\%
+\label{eq:convergence_criterion}
+\end{equation}
+
+\section{Experimental Results and Visualizations}
+The simulation of the TVRM model was carried out using the telemedicine network of Project Guardian as an input, where active risk log outputs from the simulation were generated and collected in the output folder (\texttt{outputs/}).
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/heatmap_pars_cvss.png}
+  \caption{PARS vs. CVSS scatter distribution charting asset-adjusted priority deviations across Project Guardian endpoints.}
+  \label{fig:heatmap}
+\end{figure}
+
+The scatter plot distribution shown in Fig.~\ref{fig:heatmap} indicates the spread of software vulnerabilities across target digital assets, demonstrating that matching CVSS baselines split into disparate PARS values depending on environmental factors. This variance stems from localized directory metadata tagging and compensating control statuses, departing from a single uniform diagonal solution for vulnerability resolution.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/remediation_inversion_chart.png}
+  \caption{Remediation queue inversion tracking the shift delta between PARS structural ranking and standard raw CVSS sequencing.}
+  \label{fig:inversion}
+\end{figure}
+
+The graph in Fig.~\ref{fig:inversion} illustrates absolute rank inversion metrics ($\Delta R$) tracked using Equation~\eqref{eq:rank_delta}:
+\begin{equation}
+\Delta R = \text{PARS Rank} - \text{CVSS Rank}
+\label{eq:rank_delta}
+\end{equation}
+Positive scores indicate necessary escalations for remediation caused by the sensitivity of the data variables associated with the asset deployment layer~\cite{b6}. For example, \texttt{VULN-005} is a vulnerability that has a minimal technical baseline of $4.8$, but features a control deficiency score of $\text{CES}=0.00$. As such, it demands urgent action since it is situated on a critical genomic storage asset. On the other hand, highly defended vulnerabilities such as \texttt{VULN-004} witness steady priority reductions.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/ces_reduction.png}
+  \caption{Composite queue trend tracking multi-variable PARS adjustments across validated compensating control environments.}
+  \label{fig:ces_reduction}
+\end{figure}
+
+Performance characteristics of the active control verification configurations are plotted against the production queue in Fig.~\ref{fig:ces_reduction}, showing dynamic risk behavior during the movement of variables towards the optimal boundary as identified in Equation~\eqref{eq:ces_boundary}:
+\begin{equation}
+\text{CES} \to 1.0
+\label{eq:ces_boundary}
+\end{equation}
+This trace is indicative of the overall operational distribution of the testbed queue. While each asset vector decreases in direct proportion to control implementation, the collective queue baseline illustrates non-linear threshold jumps; in the case of the rapid rise noted above CES 0.80, these compliance levels are critical ($\text{PIR} = 3.0$) with major vulnerabilities in software that cannot be fully compensated for at the local level~\cite{b12}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/sensitivity_analysis_charts.png}
+  \caption{Multi-variable sensitivity analysis charting coordinate boundary variations across combined configurations of PIR and CES parameters.}
+  \label{fig:sensitivity}
+\end{figure}
+
+The multi-variable sensitivity analysis shown in Fig.~\ref{fig:sensitivity} illustrates the reliability of the mathematical engine, whereby final scores are plotted across a continuous range of control capabilities versus distinct PIR ranges. The linear decay functions confirm that risk reduction follows predictable trends across all infrastructure scenarios~\cite{b19}.
+
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=0.95\linewidth]{output/control_gap_heatmap.png}
+  \caption{NIST SP 800-53 Control compliance gap density mapping across evaluated infrastructure vulnerabilities.}
+  \label{fig:control_gap}
+  \vspace{-15pt}
+\end{figure}
+
+\section{Limitations, Safeguards, and Threats to Validity}
+\subsection{Governance Control Override Limits and Portable Validity}
+The process of operational deployment involves assessing certain structural constraints and threats to validity including: (1) \textit{Limits on Governance Control Override}: To avoid structural bias toward technical controls, a policy override sets extreme vulnerabilities ($\text{CVSS} \ge 9.0$) on sensitive nodes ($\text{PIR}=3.0$) to a floor level of High priority, irrespective of any calculated optimal CES values; (2) \textit{Data Freshness Vulnerabilities}: Correct framework execution relies on synchronization of asset inventories~\cite{b1}, controlled via an exponential temporal decay constant; (3) \textit{Normalization Invariance}: Normalization of evaluations into standardized matrices may involve non-linear operations requiring localized organizational tuning; (4) \textit{Inconsistent Control Family Linking}: Assignment of vulnerabilities to compensating control blocks may involve errors due to CMDB metadata drops~\cite{b19}. The solution to this problem is achieved by adding automated schema checks and setting a fail-safe ($\text{PIR}=3.0$) default status for cases where metadata cannot be provided or validated; and (5) \textit{Dataset Portability}: Testing was limited to a pilot telehealth setup, necessitating future validation across disparate industrial settings. To overcome empirical constraints related to dataset portability, structural data orchestration modules, telemetry parsing scripts, and the 10,000-iteration validation framework are made open-source.
+\vspace{-3pt}
+\section{Discussion and Future Challenges}
+Experimental validation demonstrates that the TVRM/PARS framework overcomes context gaps without introducing significant computational overhead. Resolving risk across separate technical, regulatory, and defensive axes naturally aligns engineering pipelines with operational realities. However, dynamic infrastructure transitions within cloud environments complicate control tracking, requiring automated, unsupervised machine learning clustering models to map vulnerability signatures to live controls without relying on manual expert elicitation.
+
+\section{Conclusion}
+The Tri-Vector Risk Model gives a clear and contextual approach to computational security where data protection governance is built directly into the vulnerability management process. Blending a CVSS software vulnerability score with asset sensitivity information and control effectiveness verifications through live telemetry gives TVRM the capacity to resolve the context gap in the vulnerability prioritization process.
+\vspace{-3pt}
+\section*{Data Availability and Reproducibility}
+All data pipelines, sample telemetry sheets (\texttt{nessus}, \texttt{cmdb}, \texttt{control} logs), and the 10,000-iteration Monte Carlo engine are open-source and available in the \href{https://github.com/Tejashwini2406/tvrm_pipeline_project_guardian.git}{Tejashwini2406/tvrm\_pipeline\_project\_guardian} repository.
+
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{#1}
+\csname url@samestyle\endcsname
+\providecommand{\doi}[1]{DOI:~\href{http://dx.doi.org/#1}{\path{#1}}}
+
+\bibitem{b1}
+M.~Adam, M.~Hammoudeh, R.~Alrawashdeh, and B.~Alsulaimy, ``A survey on
+  security, privacy, trust, and architectural challenges in {IoT} systems,''
+  \emph{IEEE Access}, vol.~12, pp. 57128--57149, 2024. \doi{10.1109/ACCESS.2024.3382709}
+
+\bibitem{b2}
+O.~Aouedi, T.-H. Vu, A.~Sacco, D.~C. Nguyen, K.~Piamrat, G.~Marchetto, and
+  Q.-V. Pham, ``A survey on intelligent internet of things: Applications,
+  security, privacy, and future directions,'' \emph{IEEE Communications Surveys
+  \& Tutorials}, vol.~27, no.~2, pp. 1238--1292, 2025. \doi{10.1109/COMST.2024.3430368}
+
+\bibitem{b4}
+C.~Chen, J.~Liu, H.~Tan \emph{et~al.}, ``Trustworthy federated learning:
+  privacy, security, and beyond,'' \emph{Knowledge and Information Systems},
+  vol.~67, pp. 2321--2356, 2025. \doi{10.1007/s10115-024-02285-2}
+
+\bibitem{b5}
+Y.~Chen and P.~Esmaeilzadeh, ``Generative {AI} in medical practice: In-depth
+  exploration of privacy and security challenges,'' \emph{Journal of Medical
+  Internet Research}, vol.~26, p. e53008, 2024. \doi{10.2196/53008}
+
+\bibitem{b6}
+I.~Chereja, R.~Erdei, D.~Delinschi, E.~Pasca, A.~Avram, and O.~Matei,
+  ``Privacy-conducive data ecosystem architecture: By-design vulnerability
+  assessment using privacy risk expansion factor and privacy exposure index,''
+  \emph{Sensors}, vol.~25, no.~11, p. 3554, 2025. \doi{10.3390/s25113554}
+
+\bibitem{b8}
+A.~Golda, K.~Mekonen, A.~Pandey, A.~S. Singh, V.~Hassija, V.~Chamola, and
+  B.~Sikdar, ``Privacy and security concerns in generative {AI}: A
+  comprehensive survey,'' \emph{IEEE Access}, vol.~12, pp. 48126--48144, 2024. \doi{10.1109/ACCESS.2024.3381611}
+
+\bibitem{b9}
+J.~Spring, Eric Hatleback, A.~Householder, A.~Manion, and D.~Shick, ``Time to change the {CVSS}?'' \emph{IEEE Security \& Privacy}, vol.~19, no.~2, pp.
+  74--78, 2021. \doi{10.1109/MSEC.2020.3044475}
+
+\bibitem{b12}
+S.~Islam, N.~Basheer, S.~Papastergiou, M.~Ciampi, and S.~Silvestri,
+  ``Intelligent dynamic cybersecurity risk management framework with
+  explainability and interpretability of {AI} models for enhancing security and
+  resilience of digital infrastructure,'' \emph{Journal of Reliable
+  Intelligent Environments}, 2025, in Press. \doi{10.1007/s40860-025-00253-3}
+
+\bibitem{b13}
+M.~A. Khatun, S.~F. Memon, C.~Eising, and L.~L. Dhirani, ``Machine learning for
+  healthcare-{IoT} security: A review and risk mitigation,'' \emph{IEEE
+  Access}, vol.~11, pp. 145869--145896, 2023. \doi{10.1109/ACCESS.2023.3346320}
+
+\bibitem{b14}
+K.~Svandova and Z.~Smutny, ``Internet of medical things security frameworks for
+  risk assessment and management: A scoping review,'' \emph{Journal of
+  Multidisciplinary Healthcare}, vol.~17, pp. 2281--2301, 2024. \doi{10.2147/JMDH.S459987}
+
+\bibitem{b15}
+F.~Tazi, A.~Nandakumar, J.~Dykstra, P.~Rajivan, and S.~Das, ``SoK: Analyzing
+  privacy and security of healthcare data from the user perspective,''
+  \emph{ACM Transactions on Computing for Healthcare}, vol.~5, no.~2, pp.
+  Article 11, 2024. \doi{10.1145/3650116}
+
+\bibitem{b16}
+J.~Jacobs, S.~Romanosky, B.~Edwards, I.~Adjerid, and M.~Roytman, ``Exploit
+  prediction scoring system ({EPSS}),'' \emph{Digital Threats: Research and
+  Practice}, vol.~2, no.~3, pp. Article 20, 2021. \doi{10.1145/3436242}
+
+\bibitem{b17}
+S.~Wairimu, L.~Iwaya, L.~Fritsch, and S.~Lindskog, ``On the evaluation of
+  privacy impact assessment and privacy risk assessment methodologies: A
+  systematic literature review,'' \emph{IEEE Access}, vol.~12, pp.
+  19625--19650, 2024. \doi{10.1109/ACCESS.2024.3360864}
+
+\bibitem{b18}
+W.~Wei and L.~Liu, ``Trustworthy distributed {AI} systems: Robustness,
+  privacy, and governance,'' \emph{ACM Computing Surveys}, vol.~57, no.~6, pp.
+  Article 143, 2025. \doi{10.1145/3645102}
+
+\bibitem{b19}
+X.~Wei and Y.~Dong, ``A hybrid approach combining {Bayesian} networks and
+  logistic regression for enhancing risk assessment,'' \emph{Scientific
+  Reports}, vol.~15, p. 26802, 2025. \doi{10.1038/s41598-025-10291-9}
+
+\end{thebibliography}
+
+\end{document}

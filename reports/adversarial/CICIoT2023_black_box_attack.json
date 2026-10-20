@@ -1,0 +1,83 @@
+{
+  "dataset": "CICIoT2023",
+  "evaluation_status": "exploratory_checkpoint_specific",
+  "experiment": "score_query_spsa_against_actual_option_c",
+  "timestamp_utc": "2026-10-19T15:22:10.709168+00:00",
+  "split_strategy": "official_source_partitions",
+  "provenance": {
+    "split_manifest_sha256": "b9023da8c09d45ea7ee66053c6856b4176513b4f8dab45cedf6c18351488802d",
+    "test_split_sha256": "c13b68184a3deaf5390827a9c3e3211bde2b6728b28b9f637ad42744e977997c",
+    "training_artifact_sha256": {
+      "prep_standardized.joblib": "3427683d99569d80ee2cd5585de49f5fa396832c9ae75234f15c69868ba697de",
+      "rf_model.joblib": "22e06dc167c39494bd939dce4da39224fea389d23aceaa75f9455ef949454bac",
+      "mlp_adversarial.pt": "e362644548f5fa60ea9ecc9c03c5a529b0ec32dec5ba174042c5baed6e3958ee",
+      "ae_model.pt": "289002cb82655f2f875c82523542b95ee49f599c068a8b6ea757d57c306efda7"
+    }
+  },
+  "threat_model": {
+    "access": "score-query access to the deployed Option C probability",
+    "target": "0.7 * actual RF probability + 0.3 * actual robust-MLP probability",
+    "budget_space": "RobustScaler model-input coordinates",
+    "epsilon_linf": 0.1,
+    "mutable_features": [
+      "flow_duration",
+      "flow_bytes_per_sec",
+      "flow_pkts_per_sec",
+      "mean_pkt_size",
+      "payload_byte_ratio",
+      "pkt_count_ratio",
+      "tcp_syn_ratio",
+      "temporal_iat_mean",
+      "temporal_iat_cv",
+      "temporal_flow_rate_ewma",
+      "temporal_byte_rate_ewma",
+      "temporal_syn_rate_ewma",
+      "behavioral_dst_diversity",
+      "behavioral_port_entropy",
+      "behavioral_fanout_ratio",
+      "behavioral_unanswered_ratio",
+      "behavioral_src_activity_ewma"
+    ],
+    "frozen_features": [
+      "proto_icmp",
+      "proto_other",
+      "proto_tcp",
+      "proto_udp"
+    ],
+    "physical_realizability": "Not established; independent feature perturbations in scaled space may not correspond to valid network flows.",
+    "bcl_scope": "The BCL is advisory and does not change Option C's ATTACK/BENIGN decision. Its alert path is not optimized by this per-flow attack."
+  },
+  "attack": {
+    "method": "SPSA finite-difference sign updates against actual Option C scores",
+    "seed": 42,
+    "steps": 40,
+    "alpha": 0.025,
+    "probe_scale": 0.01,
+    "optimization_queries_per_sample": 80,
+    "optimization_query_inputs": 10240,
+    "clean_test_score_query_inputs": 10000,
+    "adversarial_evaluation_query_inputs": 128,
+    "total_score_query_inputs": 20368
+  },
+  "evaluation": {
+    "test_rows": 10000,
+    "correctly_detected_test_attacks": 9733,
+    "attacks_selected_for_query_attack": 128,
+    "successful_evasions": 0,
+    "attack_success_rate": 0.0,
+    "attack_success_rate_95ci_wilson": [
+      0.0,
+      0.029136956273508416
+    ],
+    "attack_success_rate_denominator": "selected test attacks correctly detected by the clean Option C model",
+    "clean_probability_mean": 0.9844315982412584,
+    "adversarial_probability_mean": 0.9527592154257232,
+    "decision_threshold": 0.5
+  },
+  "limitations": [
+    "Results describe one frozen checkpoint, not the distribution across training seeds.",
+    "This test-set attack evaluation is exploratory and does not support a universal robustness claim.",
+    "Feature-space perturbations have not been checked for physical/network validity."
+  ],
+  "result_file": "D:\\BMSIT\\Major Project\\P1_task\\reports\\adversarial\\CICIoT2023_black_box_attack.json"
+}

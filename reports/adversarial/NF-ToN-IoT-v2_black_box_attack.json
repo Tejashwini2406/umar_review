@@ -1,0 +1,83 @@
+{
+  "dataset": "NF-ToN-IoT-v2",
+  "evaluation_status": "exploratory_checkpoint_specific",
+  "experiment": "score_query_spsa_against_actual_option_c",
+  "timestamp_utc": "2026-10-19T15:21:53.375990+00:00",
+  "split_strategy": "seeded_stratified_random",
+  "provenance": {
+    "split_manifest_sha256": "954d64d7bcca70b5091c50ca5de0d9b5e5448e4bbc306b5241e0e808b70cfccc",
+    "test_split_sha256": "be8b01fb4dfb6ac189a6a6e4c4ee003bb44e83bb658e7af0d13b3168d249c7b7",
+    "training_artifact_sha256": {
+      "prep_standardized.joblib": "37d404ace7ad38f124f33af1e61acde6c2428941a9ccdea478de6ec37105a351",
+      "rf_model.joblib": "ef210d62114854fd5ee5f1c989cf4e7f9cb0f151621d68c6eb824b6fcdd9545d",
+      "mlp_adversarial.pt": "a1759a5ed934287a1ff4de0723d7afac1bcba9489224fc0ad674ad3a00ce513d",
+      "ae_model.pt": "662cc4ecf683ba8e37a9ebdbf428f6a8cbe0f735250ada11ba522696b2265dc4"
+    }
+  },
+  "threat_model": {
+    "access": "score-query access to the deployed Option C probability",
+    "target": "0.7 * actual RF probability + 0.3 * actual robust-MLP probability",
+    "budget_space": "RobustScaler model-input coordinates",
+    "epsilon_linf": 0.1,
+    "mutable_features": [
+      "flow_duration",
+      "flow_bytes_per_sec",
+      "flow_pkts_per_sec",
+      "mean_pkt_size",
+      "payload_byte_ratio",
+      "pkt_count_ratio",
+      "tcp_syn_ratio",
+      "temporal_iat_mean",
+      "temporal_iat_cv",
+      "temporal_flow_rate_ewma",
+      "temporal_byte_rate_ewma",
+      "temporal_syn_rate_ewma",
+      "behavioral_dst_diversity",
+      "behavioral_port_entropy",
+      "behavioral_fanout_ratio",
+      "behavioral_unanswered_ratio",
+      "behavioral_src_activity_ewma"
+    ],
+    "frozen_features": [
+      "proto_icmp",
+      "proto_other",
+      "proto_tcp",
+      "proto_udp"
+    ],
+    "physical_realizability": "Not established; independent feature perturbations in scaled space may not correspond to valid network flows.",
+    "bcl_scope": "The BCL is advisory and does not change Option C's ATTACK/BENIGN decision. Its alert path is not optimized by this per-flow attack."
+  },
+  "attack": {
+    "method": "SPSA finite-difference sign updates against actual Option C scores",
+    "seed": 42,
+    "steps": 40,
+    "alpha": 0.025,
+    "probe_scale": 0.01,
+    "optimization_queries_per_sample": 80,
+    "optimization_query_inputs": 10240,
+    "clean_test_score_query_inputs": 2002,
+    "adversarial_evaluation_query_inputs": 128,
+    "total_score_query_inputs": 12370
+  },
+  "evaluation": {
+    "test_rows": 2002,
+    "correctly_detected_test_attacks": 1427,
+    "attacks_selected_for_query_attack": 128,
+    "successful_evasions": 30,
+    "attack_success_rate": 0.234375,
+    "attack_success_rate_95ci_wilson": [
+      0.16939357691207274,
+      0.31483543110822865
+    ],
+    "attack_success_rate_denominator": "selected test attacks correctly detected by the clean Option C model",
+    "clean_probability_mean": 0.9092320919670511,
+    "adversarial_probability_mean": 0.6122147548985354,
+    "decision_threshold": 0.5
+  },
+  "limitations": [
+    "Results describe one frozen checkpoint, not the distribution across training seeds.",
+    "This test-set attack evaluation is exploratory and does not support a universal robustness claim.",
+    "Feature-space perturbations have not been checked for physical/network validity."
+  ],
+  "result_file": "D:\\BMSIT\\Major Project\\P1_task\\reports\\adversarial\\NF-ToN-IoT-v2_black_box_attack.json"
+}

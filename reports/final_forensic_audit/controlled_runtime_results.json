@@ -1,0 +1,65 @@
+{
+  "1": {
+    "batch_size": 1,
+    "mean_batch_latency_ms": 31.661939989620198,
+    "std_batch_latency_ms": 3.4446565607119135,
+    "min_batch_latency_ms": 22.922199917957187,
+    "per_sample_latency_ms": 31.661939989620198,
+    "mean_throughput": 32.01685499790232,
+    "peak_throughput": 43.62583013756035
+  },
+  "32": {
+    "batch_size": 32,
+    "mean_batch_latency_ms": 31.597143310743075,
+    "std_batch_latency_ms": 2.8119923052682974,
+    "min_batch_latency_ms": 20.80309996381402,
+    "per_sample_latency_ms": 0.9874107284607211,
+    "mean_throughput": 1022.2332779737767,
+    "peak_throughput": 1538.232285364318
+  },
+  "64": {
+    "batch_size": 64,
+    "mean_batch_latency_ms": 32.22731666949888,
+    "std_batch_latency_ms": 2.4410938395974804,
+    "min_batch_latency_ms": 28.49439997226,
+    "per_sample_latency_ms": 0.50355182296092,
+    "mean_throughput": 1996.1832080101478,
+    "peak_throughput": 2246.055367451344
+  },
+  "128": {
+    "batch_size": 128,
+    "mean_batch_latency_ms": 33.30297333498796,
+    "std_batch_latency_ms": 5.2279710559373385,
+    "min_batch_latency_ms": 29.179799952544272,
+    "per_sample_latency_ms": 0.26017947917959344,
+    "mean_throughput": 3911.921000636262,
+    "peak_throughput": 4386.596214099107
+  },
+  "256": {
+    "batch_size": 256,
+    "mean_batch_latency_ms": 44.595576683059335,
+    "std_batch_latency_ms": 4.987521382420982,
+    "min_batch_latency_ms": 31.228300067596138,
+    "per_sample_latency_ms": 0.17420147141820053,
+    "mean_throughput": 5830.363204170292,
+    "peak_throughput": 8197.692459911928
+  },
+  "512": {
+    "batch_size": 512,
+    "mean_batch_latency_ms": 46.89268333604559,
+    "std_batch_latency_ms": 3.8787439845677336,
+    "min_batch_latency_ms": 32.17280004173517,
+    "per_sample_latency_ms": 0.09158727214071405,
+    "mean_throughput": 11012.987884301592,
+    "peak_throughput": 15914.064033463788
+  },
+  "1024": {
+    "batch_size": 1024,
+    "mean_batch_latency_ms": 48.824590002186596,
+    "std_batch_latency_ms": 4.814270055728949,
+    "min_batch_latency_ms": 40.959600009955466,
+    "per_sample_latency_ms": 0.04768026367401035,
+    "mean_throughput": 21161.049130876978,
+    "peak_throughput": 25000.244136932757
+  }
+}

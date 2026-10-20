@@ -1,0 +1,210 @@
+{
+  "dataset": "CICIoT2023",
+  "evaluation_status": "exploratory_not_confirmatory",
+  "evaluation_caveat": "The two-sided BCL scoring rule was introduced after inspecting an earlier evaluation on the ToN-IoT test split. Treat all current metrics as exploratory; confirm with a fresh holdout or nested validation protocol before making paper claims.",
+  "training_config": {
+    "dataset": "CICIoT2023",
+    "seed": 42,
+    "epochs": 15,
+    "batch_size": 256,
+    "rf_estimators": 100,
+    "rf_max_depth": 15,
+    "ae_training_rows": 733,
+    "train_rows": 30000,
+    "split_strategy": "official_source_partitions",
+    "feature_names": [
+      "flow_duration",
+      "flow_bytes_per_sec",
+      "flow_pkts_per_sec",
+      "mean_pkt_size",
+      "payload_byte_ratio",
+      "pkt_count_ratio",
+      "tcp_syn_ratio",
+      "proto_tcp",
+      "proto_udp",
+      "proto_icmp",
+      "proto_other",
+      "temporal_iat_mean",
+      "temporal_iat_cv",
+      "temporal_flow_rate_ewma",
+      "temporal_byte_rate_ewma",
+      "temporal_syn_rate_ewma",
+      "behavioral_dst_diversity",
+      "behavioral_port_entropy",
+      "behavioral_fanout_ratio",
+      "behavioral_unanswered_ratio",
+      "behavioral_src_activity_ewma"
+    ],
+    "python_version": "3.13.1 (tags/v3.13.1:0671451, Dec  3 2024, 19:06:28) [MSC v.1942 64 bit (AMD64)]",
+    "numpy_version": "2.5.3",
+    "scikit_learn_version": "1.9.1",
+    "pytorch_version": "2.14.1+cpu",
+    "split_manifest_sha256": "b9023da8c09d45ea7ee66053c6856b4176513b4f8dab45cedf6c18351488802d",
+    "artifact_sha256": {
+      "prep_standardized.joblib": "3427683d99569d80ee2cd5585de49f5fa396832c9ae75234f15c69868ba697de",
+      "rf_model.joblib": "22e06dc167c39494bd939dce4da39224fea389d23aceaa75f9455ef949454bac",
+      "mlp_adversarial.pt": "e362644548f5fa60ea9ecc9c03c5a529b0ec32dec5ba174042c5baed6e3958ee",
+      "ae_model.pt": "289002cb82655f2f875c82523542b95ee49f599c068a8b6ea757d57c306efda7"
+    }
+  },
+  "split_artifact_sha256": {
+    "split_manifest.json": "b9023da8c09d45ea7ee66053c6856b4176513b4f8dab45cedf6c18351488802d",
+    "val.parquet": "ae5ed58d5d9a9083ec4a37f064b99505bfe6af7dc11f16571b4a444d58414807",
+    "test.parquet": "c13b68184a3deaf5390827a9c3e3211bde2b6728b28b9f637ad42744e977997c"
+  },
+  "split_strategy": "official_source_partitions",
+  "calibration": {
+    "target_false_positive_rate": 0.01,
+    "observed_validation_false_positive_rate": 0.00980392156862745,
+    "benign_validation_samples": 204,
+    "history_size": 10,
+    "use_stream_history": false,
+    "artifact": "D:\\BMSIT\\Major Project\\P1_task\\models\\corrected_run\\CICIoT2023\\bcl_calibration.json"
+  },
+  "ordered_test_stream": {
+    "benign_false_positive_rate": 0.01276595744680851,
+    "benign_false_positive_rate_95ci": [
+      0.004350902187794742,
+      0.03685408319994911
+    ],
+    "attack_detection_rate": 0.44987199180747567,
+    "attack_detection_rate_95ci": [
+      0.44002655188860834,
+      0.4597568559876634
+    ],
+    "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+    "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+    "bcl_score_roc_auc": 0.952617576886623,
+    "component_roc_auc": {
+      "model_disagreement": 0.017864932291836895,
+      "confidence_drift": 0.5,
+      "prediction_instability": 0.5,
+      "autoencoder_deviation": 0.06003791221361572
+    },
+    "detector_roc_auc": 0.9943833273414604
+  },
+  "test_input_order": "source event-time order where supported; otherwise dataset row order, not asserted to be chronological",
+  "confidence_interval_method": "95% Wilson score intervals on row-level rates; intervals do not model within-host, campaign, or temporal dependence",
+  "shuffled_test_streams": [
+    {
+      "seed": 2027,
+      "benign_false_positive_rate": 0.01276595744680851,
+      "benign_false_positive_rate_95ci": [
+        0.004350902187794742,
+        0.03685408319994911
+      ],
+      "attack_detection_rate": 0.44987199180747567,
+      "attack_detection_rate_95ci": [
+        0.44002655188860834,
+        0.4597568559876634
+      ],
+      "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+      "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+      "bcl_score_roc_auc": 0.9526175768866227,
+      "component_roc_auc": {
+        "model_disagreement": 0.017864932291836895,
+        "confidence_drift": 0.5,
+        "prediction_instability": 0.5,
+        "autoencoder_deviation": 0.06003791221361571
+      },
+      "detector_roc_auc": 0.9943833273414604
+    },
+    {
+      "seed": 2041,
+      "benign_false_positive_rate": 0.01276595744680851,
+      "benign_false_positive_rate_95ci": [
+        0.004350902187794742,
+        0.03685408319994911
+      ],
+      "attack_detection_rate": 0.44987199180747567,
+      "attack_detection_rate_95ci": [
+        0.44002655188860834,
+        0.4597568559876634
+      ],
+      "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+      "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+      "bcl_score_roc_auc": 0.952617576886623,
+      "component_roc_auc": {
+        "model_disagreement": 0.017864932291836895,
+        "confidence_drift": 0.5,
+        "prediction_instability": 0.5,
+        "autoencoder_deviation": 0.06003791221361571
+      },
+      "detector_roc_auc": 0.9943833273414604
+    },
+    {
+      "seed": 4093,
+      "benign_false_positive_rate": 0.01276595744680851,
+      "benign_false_positive_rate_95ci": [
+        0.004350902187794742,
+        0.03685408319994911
+      ],
+      "attack_detection_rate": 0.44987199180747567,
+      "attack_detection_rate_95ci": [
+        0.44002655188860834,
+        0.4597568559876634
+      ],
+      "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+      "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+      "bcl_score_roc_auc": 0.952617576886623,
+      "component_roc_auc": {
+        "model_disagreement": 0.017864932291836895,
+        "confidence_drift": 0.5,
+        "prediction_instability": 0.5,
+        "autoencoder_deviation": 0.06003791221361571
+      },
+      "detector_roc_auc": 0.9943833273414604
+    },
+    {
+      "seed": 8191,
+      "benign_false_positive_rate": 0.01276595744680851,
+      "benign_false_positive_rate_95ci": [
+        0.004350902187794742,
+        0.03685408319994911
+      ],
+      "attack_detection_rate": 0.44987199180747567,
+      "attack_detection_rate_95ci": [
+        0.44002655188860834,
+        0.4597568559876634
+      ],
+      "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+      "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+      "bcl_score_roc_auc": 0.9526175768866227,
+      "component_roc_auc": {
+        "model_disagreement": 0.017864932291836895,
+        "confidence_drift": 0.5,
+        "prediction_instability": 0.5,
+        "autoencoder_deviation": 0.06003791221361571
+      },
+      "detector_roc_auc": 0.9943833273414604
+    },
+    {
+      "seed": 16381,
+      "benign_false_positive_rate": 0.01276595744680851,
+      "benign_false_positive_rate_95ci": [
+        0.004350902187794742,
+        0.03685408319994911
+      ],
+      "attack_detection_rate": 0.44987199180747567,
+      "attack_detection_rate_95ci": [
+        0.44002655188860834,
+        0.4597568559876634
+      ],
+      "detector_benign_false_positive_rate_at_0_5": 0.5319148936170213,
+      "detector_attack_detection_rate_at_0_5": 0.9967229902713773,
+      "bcl_score_roc_auc": 0.952617576886623,
+      "component_roc_auc": {
+        "model_disagreement": 0.017864932291836895,
+        "confidence_drift": 0.5,
+        "prediction_instability": 0.5,
+        "autoencoder_deviation": 0.06003791221361572
+      },
+      "detector_roc_auc": 0.9943833273414604
+    }
+  ],
+  "order_sensitivity": {
+    "benign_false_positive_rate": 0.0,
+    "attack_detection_rate": 5.551115123125783e-17,
+    "bcl_score_roc_auc": 0.0
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "metadata": {
+    "timestamp": "2026-10-04T21:35:00Z",
+    "git_commit": "c8ffa15f03e61fe601994bf53396b8614d9d3596",
+    "seed": 42,
+    "datasets": [
+      "Edge-IIoTset",
+      "NF-ToN-IoT-v2",
+      "ToN-IoT",
+      "CICIoT2023"
+    ],
+    "experiment_type": "Adaptive Surrogate-Gradient Attack Evaluation",
+    "threat_model_definition": "Grey-box / Adaptive Surrogate Attack. Attacker queries training set RF outputs to fit a differentiable neural surrogate S_RF(x) ~ P_RF(x). Gradients are backpropagated through P_surrogate = 0.7*S_RF + 0.3*RobustMLP. Adversarial samples are evaluated against the ACTUAL frozen RF and Robust MLP ensemble.",
+    "important_caveat": "This is NOT a true white-box gradient attack through the non-differentiable Random Forest. It is an adaptive surrogate approximation.",
+    "data_leakage_safeguard": "Surrogate trained strictly on training split (train.parquet); validation split (val.parquet) used for fidelity evaluation; test split (test.parquet) reserved strictly for final attack evaluation."
+  },
+  "by_dataset": {
+    "Edge-IIoTset": {
+      "clean_attackable_count": 1000,
+      "successful_adaptive_attacks": 118,
+      "adaptive_surrogate_pgd10_asr": 0.118,
+      "neural_stream_pgd10_asr_baseline": 0.038,
+      "asr_difference_adaptive_vs_baseline": 0.08,
+      "surrogate_architecture": "MLP (21 -> 128 -> 64 -> 32 -> 1, ReLU, Sigmoid output)",
+      "surrogate_training_data": "Edge-IIoTset train.parquet (N=4200)",
+      "surrogate_train_mse": 0.000443,
+      "surrogate_val_mse": 0.115407,
+      "surrogate_val_r2": -0.594425,
+      "pgd_parameters": {
+        "epsilon": 0.1,
+        "alpha": 0.025,
+        "steps": 10,
+        "protocol_mask": "7:11 (proto_tcp, proto_udp, proto_icmp, proto_other frozen)"
+      }
+    },
+    "NF-ToN-IoT-v2": {
+      "clean_attackable_count": 1000,
+      "successful_adaptive_attacks": 59,
+      "adaptive_surrogate_pgd10_asr": 0.059,
+      "neural_stream_pgd10_asr_baseline": 0.04,
+      "asr_difference_adaptive_vs_baseline": 0.019,
+      "surrogate_architecture": "MLP (21 -> 128 -> 64 -> 32 -> 1, ReLU, Sigmoid output)",
+      "surrogate_training_data": "NF-ToN-IoT-v2 train.parquet (N=4200)",
+      "surrogate_train_mse": 0.017257,
+      "surrogate_val_mse": 0.006604,
+      "surrogate_val_r2": 0.94767,
+      "pgd_parameters": {
+        "epsilon": 0.1,
+        "alpha": 0.025,
+        "steps": 10,
+        "protocol_mask": "7:11 (proto_tcp, proto_udp, proto_icmp, proto_other frozen)"
+      }
+    },
+    "ToN-IoT": {
+      "clean_attackable_count": 1000,
+      "successful_adaptive_attacks": 0,
+      "adaptive_surrogate_pgd10_asr": 0.0,
+      "neural_stream_pgd10_asr_baseline": 0.0,
+      "asr_difference_adaptive_vs_baseline": 0.0,
+      "surrogate_architecture": "MLP (21 -> 128 -> 64 -> 32 -> 1, ReLU, Sigmoid output)",
+      "surrogate_training_data": "ToN-IoT train.parquet (N=4200)",
+      "surrogate_train_mse": 0.109302,
+      "surrogate_val_mse": 0.195009,
+      "surrogate_val_r2": 0.036156,
+      "pgd_parameters": {
+        "epsilon": 0.1,
+        "alpha": 0.025,
+        "steps": 10,
+        "protocol_mask": "7:11 (proto_tcp, proto_udp, proto_icmp, proto_other frozen)"
+      }
+    },
+    "CICIoT2023": {
+      "clean_attackable_count": 1000,
+      "successful_adaptive_attacks": 11,
+      "adaptive_surrogate_pgd10_asr": 0.011,
+      "neural_stream_pgd10_asr_baseline": 0.012,
+      "asr_difference_adaptive_vs_baseline": -0.001,
+      "surrogate_architecture": "MLP (21 -> 128 -> 64 -> 32 -> 1, ReLU, Sigmoid output)",
+      "surrogate_training_data": "CICIoT2023 train.parquet (N=4200)",
+      "surrogate_train_mse": 0.007584,
+      "surrogate_val_mse": 0.043413,
+      "surrogate_val_r2": 0.535712,
+      "pgd_parameters": {
+        "epsilon": 0.1,
+        "alpha": 0.025,
+        "steps": 10,
+        "protocol_mask": "7:11 (proto_tcp, proto_udp, proto_icmp, proto_other frozen)"
+      }
+    }
+  }
+}
